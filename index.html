@@ -891,19 +891,56 @@ function initDash(){
 }
 async function carregarDashboard(){
   try{
-    const resp=await fetch(SHEETS_URL+'?acao=getDados');
-    const json=await resp.json();
-    if(json&&json.agentes&&json.agentes.length>0){
-      const lista=json.agentes;
-      const mi=lista.reduce((acc,a)=>acc+calcISR(a),0)/lista.length;
-      document.getElementById('kv-isr').textContent=mi.toFixed(1)+'%';
-      document.getElementById('kv-ag').textContent=lista.length;
-      document.getElementById('kv-nci').textContent=lista.reduce((a,x)=>a+x.nci,0);
-      document.getElementById('kv-fa').textContent=lista.reduce((a,x)=>a+x.fa,0);
-      renderAg(lista);
-      toast('📊 Dashboard atualizado com dados reais!','ok');
+    const resp = await fetch(SHEETS_URL + '?acao=getDados');
+    if(!resp.ok) return;
+    const json = await resp.json();
+
+    if(!json || !json.ok) return;
+
+    // Atualiza diagnóstico se houver
+    if(json.diagnostico && json.diagnostico.trim() !== ''){
+      document.getElementById('diagta').value = json.diagnostico;
     }
-  }catch(e){/* usa mockados */}
+
+    // Se houver agentes salvos, usa dados reais
+    if(json.agentes && json.agentes.length > 0){
+      const lista = json.agentes;
+
+      // KPIs
+      const totalNci = lista.reduce((acc,a) => acc + (Number(a.nci)||0), 0);
+      const totalFa  = lista.reduce((acc,a) => acc + (Number(a.fa)||0),  0);
+      const totalNcp = lista.reduce((acc,a) => acc + (Number(a.ncp)||12),0);
+      const medIsr   = lista.reduce((acc,a) => acc + calcISR(a), 0) / lista.length;
+
+      document.getElementById('kv-isr').textContent = medIsr.toFixed(1) + '%';
+      document.getElementById('kv-ag').textContent  = lista.length;
+      document.getElementById('kv-nci').textContent = totalNci;
+      document.getElementById('kv-fa').textContent  = totalFa;
+
+      // Subtítulo do KPI agentes
+      const coords = [...new Set(lista.map(a=>a.co))];
+      document.querySelector('#kv-ag').closest('.kpi').querySelector('.ksub').textContent =
+        coords.length + ' coordenação(ões) avaliadas';
+
+      // Tabela de agentes
+      renderAg(lista);
+
+      // Atualiza badge do KPI ISR
+      const kpiIsr = document.getElementById('kv-isr').closest('.kpi');
+      const tag = kpiIsr.querySelector('.ktag');
+      if(tag){
+        if(medIsr < 60){ tag.textContent='↓ Reativo — abaixo do esperado'; tag.className='ktag w'; }
+        else if(medIsr < 80){ tag.textContent='↗ Em desenvolvimento'; tag.className='ktag w'; }
+        else{ tag.textContent='✓ Dentro do esperado'; tag.className='ktag ok'; }
+      }
+
+      toast('📊 Dashboard atualizado com ' + lista.length + ' agente(s) do Sheets!', 'ok');
+    }
+
+  }catch(e){
+    // Silencioso — mantém mockados se Sheets não responder
+    console.warn('Sheets não disponível, usando dados mockados:', e.message);
+  }
 }
 function drawG(id,val){
   const c=document.getElementById(id);if(!c)return;
