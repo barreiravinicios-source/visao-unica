@@ -135,6 +135,7 @@
   --shmd:0 8px 32px rgba(0,0,0,.12);
 }
 body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100vh;font-size:14px;line-height:1.6}
+
 /* TOPBAR */
 .topbar{background:var(--g1);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;position:sticky;top:0;z-index:300;border-bottom:1px solid rgba(255,255,255,.05);box-shadow:0 2px 20px rgba(0,0,0,.3)}
 .tl{display:flex;align-items:center;gap:14px}
@@ -146,85 +147,130 @@ body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100
 .tb{background:transparent;border:none;padding:8px 22px;border-radius:var(--rsm);font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.5)}
 .tb:hover{background:rgba(255,255,255,.08);color:#fff}
 .tb.on{background:var(--or);color:#fff;box-shadow:0 2px 8px rgba(242,101,34,.4)}
-/* SCREENS */
 .screen{display:none}.screen.on{display:block}
-/* CARDS */
+
+/* BANNER */
 .banner{background:linear-gradient(130deg,var(--g1) 0%,#0d3a1f 60%,var(--g2) 100%);padding:36px 40px 30px;border-bottom:2px solid rgba(45,148,86,.2)}
 .banner-t{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px}
 .banner-s{font-size:13px;color:rgba(255,255,255,.42);margin-top:5px}
 .cbody{max-width:1000px;margin:0 auto;padding:36px 28px 80px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);padding:28px 32px;box-shadow:var(--sh);margin-bottom:22px}
-.ctit{font-size:11px;font-weight:800;color:var(--g2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:22px;display:flex;align-items:center;gap:9px}
-.ctit::before{content:'';width:3px;height:15px;background:var(--or);border-radius:2px;display:block}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);box-shadow:var(--sh);margin-bottom:22px;overflow:hidden}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;cursor:pointer;user-select:none;transition:background .15s}
+.card-header:hover{background:var(--gxl)}
+.card-header-left{display:flex;align-items:center;gap:12px}
+.card-header-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card-header-icon.green{background:var(--gl)}
+.card-header-icon.orange{background:var(--orl)}
+.card-header-icon.blue{background:#ebf8ff}
+.card-header-icon.done{background:var(--g4)}
+.card-title{font-size:14px;font-weight:700;color:var(--t1)}
+.card-subtitle{font-size:11px;color:var(--t3);margin-top:2px}
+.card-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.card-badge.pending{background:var(--bg);color:var(--t3);border:1px solid var(--border)}
+.card-badge.done{background:var(--gl);color:var(--g3);border:1px solid rgba(45,148,86,.2)}
+.card-badge.active{background:var(--orl);color:var(--ord);border:1px solid rgba(242,101,34,.2)}
+.card-arrow{color:var(--t4);font-size:12px;transition:transform .25s}
+.card.open .card-arrow{transform:rotate(180deg)}
+.card-body{display:none;padding:0 28px 28px;border-top:1px solid var(--border)}
+.card.open .card-body{display:block}
+.card-body-inner{padding-top:24px}
+
 /* FORM */
-.fg{display:flex;flex-direction:column;gap:5px}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
 .fg label{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
-.fi{font-family:var(--font);font-size:13px;font-weight:500;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rsm);background:var(--white);color:var(--t1);outline:none;width:100%;transition:border-color .2s,box-shadow .2s}
+.fg label .req{color:var(--red)}
+.fi{font-family:var(--font);font-size:13px;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rsm);background:var(--white);color:var(--t1);outline:none;width:100%;transition:border-color .2s,box-shadow .2s}
 .fi:focus{border-color:var(--g4);box-shadow:0 0 0 3px rgba(45,148,86,.1)}
+.fi.err{border-color:var(--red);box-shadow:0 0 0 3px rgba(229,62,62,.1)}
 select.fi{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:34px}
-textarea.fi{resize:vertical;min-height:100px;line-height:1.7}
+textarea.fi{resize:vertical;min-height:90px;line-height:1.7}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.err-msg{font-size:11px;color:var(--red);margin-top:4px;display:none}
+.err-msg.show{display:block}
+
 /* UPLOAD */
-.uz{border:2px dashed var(--border);border-radius:var(--r);padding:28px 18px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);position:relative}
+.uz{border:2px dashed var(--border);border-radius:var(--r);padding:24px 18px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);position:relative}
 .uz:hover,.uz.filled{border-color:var(--g4);border-style:solid;background:var(--gxl)}
-.uz-ico{width:40px;height:40px;margin:0 auto 12px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center}
-.uz.filled .uz-ico{background:var(--g4)}
+.uz-ico{width:38px;height:38px;margin:0 auto 10px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center}
 .uz-t{font-size:13px;font-weight:700;color:var(--t2)}.uz.filled .uz-t{color:var(--g2)}
 .uz-s{font-size:11px;color:var(--t4);margin-top:3px}
 .uz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .fbadge{display:inline-flex;align-items:center;gap:5px;background:var(--g4);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:10px}
-/* GABARITO */
-.gab-top{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-.gab-top input{flex:1;min-width:180px;font-family:var(--font);font-size:13px;padding:8px 14px;border:1.5px solid var(--border);border-radius:var(--rsm);outline:none;background:var(--white)}
-.gab-top input:focus{border-color:var(--g4);box-shadow:0 0 0 3px rgba(45,148,86,.1)}
+
+/* GABARITO ITEMS */
+.gab-search-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.gab-search-row input{flex:1;min-width:180px;font-family:var(--font);font-size:13px;padding:8px 14px;border:1.5px solid var(--border);border-radius:var(--rsm);outline:none}
+.gab-search-row input:focus{border-color:var(--g4);box-shadow:0 0 0 3px rgba(45,148,86,.1)}
 .gstat{display:inline-flex;align-items:center;gap:5px;background:var(--gxl);border:1px solid var(--gl);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--g3)}
-.gstat.orange{background:var(--orl);border-color:rgba(242,101,34,.3);color:var(--ord)}
-.gstat.gray{background:var(--bg);border-color:var(--border);color:var(--t3)}
-/* NCP */
-.ncp{display:flex;background:var(--gxl);border:1px solid var(--gl);border-radius:var(--r);overflow:hidden;margin-bottom:22px}
-.ncpc{flex:1;text-align:center;padding:14px 16px;border-right:1px solid var(--gl)}
-.ncpc:last-child{border-right:none}
-.ncpn{font-size:26px;font-weight:800;color:var(--g2);font-family:var(--mono);letter-spacing:-1px;line-height:1}
-.ncpl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-top:3px}
+.gstat.or{background:var(--orl);border-color:rgba(242,101,34,.3);color:var(--ord)}
+.gstat.btn{cursor:pointer;background:var(--bg);border-color:var(--border);color:var(--t3)}
+.gstat.btn:hover{border-color:var(--red);color:var(--red)}
+
+/* NCP SUMMARY */
+.ncp-wrap{display:flex;flex-wrap:wrap;background:var(--gxl);border:1px solid var(--gl);border-radius:var(--r);overflow:hidden;margin-bottom:20px}
+.ncp-c{flex:1;min-width:80px;text-align:center;padding:12px 8px;border-right:1px solid var(--gl)}
+.ncp-c:last-child{border-right:none}
+.ncp-n{font-size:22px;font-weight:800;color:var(--g2);font-family:var(--mono);letter-spacing:-1px;line-height:1}
+.ncp-n.or{color:var(--ord)}
+.ncp-l{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+
 /* MACRO SECTIONS */
-.msec{margin-bottom:14px}
-.mhdr{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-radius:var(--rsm);background:var(--bg);border:1px solid var(--border);cursor:pointer;margin-bottom:8px;transition:all .15s;user-select:none}
+.msec{margin-bottom:12px}
+.mhdr{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-radius:var(--rsm);background:var(--bg);border:1px solid var(--border);cursor:pointer;transition:all .15s;user-select:none}
 .mhdr:hover{background:var(--gxl);border-color:var(--g4)}
-.mhdr-l{display:flex;align-items:center;gap:10px}
-.mtag{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px}
+.mhdr-l{display:flex;align-items:center;gap:8px}
+.mtag{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px}
 .mname{font-size:12px;font-weight:700;color:var(--t1)}
 .mcnt{font-size:11px;color:var(--t3)}
-.marr{color:var(--t4);font-size:11px;transition:transform .2s}
+.marr{color:var(--t4);font-size:10px;transition:transform .2s}
 .msec.open .marr{transform:rotate(180deg)}
-.mitems{display:none;grid-template-columns:repeat(4,1fr);gap:8px;padding:4px 0}
+.mitems{display:none;grid-template-columns:repeat(5,1fr);gap:7px;padding:10px 4px 4px}
 .msec.open .mitems{display:grid}
-/* ITEM CHECKBOX — com check de apontamento extra */
-.icb{
-  display:flex;align-items:center;gap:6px;
-  padding:7px 10px;border-radius:var(--rsm);
-  border:1.5px solid var(--border);background:var(--white);
-  cursor:pointer;transition:all .15s;user-select:none;
-  position:relative;
-}
+
+/* ITEM CB */
+.icb{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:var(--rsm);border:1.5px solid var(--border);background:var(--white);cursor:pointer;transition:all .15s;user-select:none}
 .icb:hover{border-color:var(--g4);background:var(--gxl)}
 .icb.checked{border-color:var(--g4);background:var(--gxl)}
 .icb.extra{border-color:var(--or);background:var(--orl)}
 .icb input[type=checkbox]{width:14px;height:14px;accent-color:var(--g4);cursor:pointer;flex-shrink:0}
-.icode{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--g3);flex:1}
-.icb.checked .icode{color:var(--g2)}
+.icode{font-family:var(--mono);font-size:10px;font-weight:700;flex:1;color:var(--g3)}
 .icb.extra .icode{color:var(--ord)}
-/* botão extra pequeno dentro do item */
-.btn-extra{
-  background:none;border:1px solid var(--border);
-  border-radius:4px;padding:1px 5px;font-size:9px;font-weight:700;
-  color:var(--t4);cursor:pointer;transition:all .15s;flex-shrink:0;
-  font-family:var(--mono);line-height:1.4;
+.btn-ve{background:none;border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-size:9px;font-weight:700;color:var(--t4);cursor:pointer;transition:all .15s;font-family:var(--mono);line-height:1.4;flex-shrink:0}
+.btn-ve:hover{border-color:var(--or);color:var(--or);background:var(--orl)}
+.btn-ve.on{background:var(--or);border-color:var(--or);color:#fff}
+
+/* AGENTES */
+.agentes-list{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.agente-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden}
+.agente-card.saved{border-color:var(--g4);background:var(--gxl)}
+.agente-card-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.agente-card-name{font-size:13px;font-weight:700;color:var(--t1)}
+.agente-card-meta{font-size:11px;color:var(--t3);margin-top:2px}
+.agente-card-body{padding:0 16px 16px;border-top:1px solid var(--border)}
+.agente-card.saved .agente-card-body{display:none}
+
+/* DESVIOS COMPORTAMENTO — opções 0 a 9 */
+.dc-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.dc-opt{
+  width:38px;height:38px;border-radius:var(--rsm);
+  border:1.5px solid var(--border);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:14px;font-weight:700;color:var(--t3);
+  cursor:pointer;transition:all .15s;flex-shrink:0;
 }
-.btn-extra:hover{border-color:var(--or);color:var(--or);background:var(--orl)}
-.btn-extra.ativo{background:var(--or);border-color:var(--or);color:#fff}
+.dc-opt:hover{border-color:var(--red);color:var(--red);background:var(--redl)}
+.dc-opt.on{background:var(--red);border-color:var(--red);color:#fff}
+
+/* AGENTE ACTIONS */
+.agente-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.btn-salvar-ag{background:var(--g2);color:#fff;border:none;padding:9px 20px;border-radius:var(--rsm);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-salvar-ag:hover{background:var(--g3)}
+
 /* FOTOS */
-.foto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.foto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .fslot{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:var(--bg);border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
 .fslot:hover{border-color:var(--g4);background:var(--gxl)}
 .fslot.loaded{border-style:solid;border-color:var(--g4);justify-content:flex-end}
@@ -232,75 +278,68 @@ textarea.fi{resize:vertical;min-height:100px;line-height:1.7}
 .fslot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .fover{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1}
 .fslot:hover .fover{display:flex}
-.fempty-ico{color:var(--t4);margin-bottom:7px}
-.fempty-t{font-size:11px;color:var(--t4);font-weight:500}
-.fcap{position:relative;z-index:3;width:100%;padding:6px 10px;border:none;border-top:1px solid rgba(255,255,255,.2);font-family:var(--font);font-size:11px;color:var(--t1);background:rgba(255,255,255,.92);outline:none}
+.f-empty-ico{color:var(--t4);margin-bottom:6px}
+.f-empty-t{font-size:11px;color:var(--t4);font-weight:500}
+.fcap{position:relative;z-index:3;width:100%;padding:5px 8px;border:none;border-top:1px solid rgba(255,255,255,.2);font-family:var(--font);font-size:10px;color:var(--t1);background:rgba(255,255,255,.9);outline:none}
 .fslot:not(.loaded) .fcap{display:none}
-.btn-add-foto{display:inline-flex;align-items:center;gap:7px;background:none;border:1.5px dashed var(--border);padding:8px 18px;border-radius:var(--rsm);font-family:var(--font);font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;transition:all .2s;margin-top:16px}
+.btn-add-foto{display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px dashed var(--border);padding:7px 16px;border-radius:var(--rsm);font-family:var(--font);font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;transition:all .2s;margin-top:14px}
 .btn-add-foto:hover{border-color:var(--g4);color:var(--g3);background:var(--gxl)}
-/* DESVIOS COMPORTAMENTO */
-.dc-list{display:flex;flex-direction:column;gap:8px}
-.dc-row{display:flex;gap:8px;align-items:center}
-.dc-row input{flex:1;font-family:var(--font);font-size:13px;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--rsm);outline:none}
-.dc-row input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(229,62,62,.1)}
-.dc-row .dc-rm{background:none;border:none;cursor:pointer;padding:4px;border-radius:4px;color:var(--t4);transition:all .2s;display:flex}
-.dc-row .dc-rm:hover{background:var(--border);color:var(--t1)}
-.btn-add-dc{display:flex;align-items:center;gap:5px;background:none;border:1.5px dashed rgba(229,62,62,.4);padding:7px 14px;border-radius:var(--rsm);font-family:var(--font);font-size:12px;font-weight:600;color:var(--red);cursor:pointer;transition:all .2s;justify-content:center;margin-top:6px;width:100%}
-.btn-add-dc:hover{border-color:var(--red);background:var(--redl)}
-/* ACTIONS */
-.cactions{display:flex;justify-content:flex-end;gap:10px;margin-top:8px}
-.btn{font-family:var(--font);font-size:13px;font-weight:700;padding:11px 26px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;border:none;letter-spacing:.1px}
+
+/* BUTTONS */
+.btn{font-family:var(--font);font-size:13px;font-weight:700;padding:10px 24px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;border:none;letter-spacing:.1px;display:inline-flex;align-items:center;gap:7px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.btn-grn{background:var(--g2);color:#fff;box-shadow:0 2px 8px rgba(15,69,37,.25)}
+.btn-grn:hover:not(:disabled){background:var(--g3);transform:translateY(-1px)}
+.btn-or{background:var(--or);color:#fff;box-shadow:0 2px 8px rgba(242,101,34,.25)}
+.btn-or:hover:not(:disabled){background:var(--ord);transform:translateY(-1px)}
 .btn-sec{background:var(--white);border:1.5px solid var(--border);color:var(--t2)}
-.btn-sec:hover{border-color:var(--t3);color:var(--t1)}
-.btn-or{background:var(--or);color:#fff;box-shadow:0 2px 8px rgba(242,101,34,.3)}
-.btn-or:hover{background:var(--ord);transform:translateY(-1px)}
-.btn-grn{background:var(--g2);color:#fff;box-shadow:0 2px 8px rgba(15,69,37,.3)}
-.btn-grn:hover{background:var(--g3);transform:translateY(-1px)}
-.btn:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
+.btn-sec:hover:not(:disabled){border-color:var(--t3);color:var(--t1)}
+.btn-ghost{background:none;border:1.5px solid var(--g4);color:var(--g3)}
+.btn-ghost:hover:not(:disabled){background:var(--gxl)}
+.btn-row{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
+
+/* AGENTES CONCLUIR ROW */
+.ag-concluir-row{display:flex;gap:10px;align-items:center;padding:14px 0 0;border-top:1px solid var(--border);margin-top:4px}
+.ag-count{flex:1;font-size:12px;color:var(--t3)}
+.ag-count strong{color:var(--g2);font-family:var(--mono);font-size:14px}
+
 /* DASHBOARD */
 .dfbar{background:var(--white);border-bottom:1px solid var(--border);padding:13px 40px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .dfg{display:flex;flex-direction:column;gap:4px}
 .dfg label{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
-.dfg select{font-family:var(--font);font-size:12px;font-weight:500;padding:7px 28px 7px 10px;border:1.5px solid var(--border);border-radius:var(--rsm);background:var(--white);color:var(--t1);appearance:none;cursor:pointer;outline:none;min-width:160px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;transition:border-color .2s}
+.dfg select{font-family:var(--font);font-size:12px;padding:7px 28px 7px 10px;border:1.5px solid var(--border);border-radius:var(--rsm);background:var(--white);color:var(--t1);appearance:none;cursor:pointer;outline:none;min-width:160px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;transition:border-color .2s}
 .dfg select:focus{border-color:var(--g4);box-shadow:0 0 0 3px rgba(45,148,86,.1)}
 .btnrf{background:none;border:1.5px solid var(--border);border-radius:var(--rsm);padding:7px 14px;font-family:var(--font);font-size:12px;font-weight:600;color:var(--t3);cursor:pointer;transition:all .2s;align-self:flex-end}
 .btnrf:hover{border-color:var(--t3);color:var(--t1)}
 .dbody{padding:28px 40px;max-width:1440px;margin:0 auto}
-/* KPIS */
 .krow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
 .kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);padding:20px 22px;box-shadow:var(--sh);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
 .kpi:hover{transform:translateY(-2px);box-shadow:var(--shmd)}
 .kpi::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;border-radius:var(--rlg) var(--rlg) 0 0}
-.kpi.g::before{background:linear-gradient(90deg,var(--g3),var(--g5))}
-.kpi.o::before{background:linear-gradient(90deg,var(--or),#f59c6c)}
-.kpi.r::before{background:linear-gradient(90deg,var(--red),#fc8181)}
-.kpi.b::before{background:linear-gradient(90deg,var(--blue),#63b3ed)}
+.kpi.g::before{background:linear-gradient(90deg,var(--g3),var(--g5))}.kpi.o::before{background:linear-gradient(90deg,var(--or),#f59c6c)}
+.kpi.r::before{background:linear-gradient(90deg,var(--red),#fc8181)}.kpi.b::before{background:linear-gradient(90deg,var(--blue),#63b3ed)}
 .kico{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
 .kpi.g .kico{background:var(--gl)}.kpi.o .kico{background:var(--orl)}.kpi.r .kico{background:var(--redl)}.kpi.b .kico{background:#ebf8ff}
 .klbl{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
 .kval{font-size:30px;font-weight:800;color:var(--t1);font-family:var(--mono);letter-spacing:-1.5px;line-height:1}
 .ksub{font-size:11px;color:var(--t3);margin-top:5px}
 .ktag{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:6px}
-.ktag.w{background:var(--orl);color:var(--ord)}
-/* DASH SECTIONS */
+.ktag.w{background:var(--orl);color:var(--ord)}.ktag.ok{background:var(--gl);color:var(--g3)}
 .stit{font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:8px;margin-bottom:3px}
 .stit::before{content:'';width:3px;height:13px;background:var(--or);border-radius:2px;display:block}
 .ssub{font-size:11px;color:var(--t3);margin-bottom:16px}
 .dc2{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);padding:22px;box-shadow:var(--sh)}
-/* GAUGES */
 .gwrap{display:flex;gap:6px;flex-wrap:wrap;justify-content:space-around}
 .gi{text-align:center;padding:12px 10px;border-radius:var(--r);transition:background .15s;flex:1;min-width:115px}
 .gi:hover{background:var(--gxl)}
 .gilbl{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
 .gival{font-size:21px;font-weight:800;font-family:var(--mono);margin-top:3px;letter-spacing:-1px}
 .gniv{display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:3px}
-/* DONUT LEGEND */
 .dlg{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .dlr{display:flex;align-items:center;justify-content:space-between;font-size:12px}
 .dll{display:flex;align-items:center;gap:7px;color:var(--t2)}
 .dld{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 .dlv{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--t1)}
-/* MACRO BREAKDOWN */
 .mbl{display:flex;flex-direction:column;gap:12px}
 .mbr{display:flex;align-items:center;gap:10px}
 .mbtag{font-family:var(--mono);font-size:10px;font-weight:700;background:var(--gxl);color:var(--g3);padding:2px 7px;border-radius:5px;min-width:38px;text-align:center}
@@ -308,14 +347,12 @@ textarea.fi{resize:vertical;min-height:100px;line-height:1.7}
 .mbbg{flex:1;background:var(--border);border-radius:4px;height:6px;overflow:hidden}
 .mbfill{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.22,1,.36,1)}
 .mbpct{font-family:var(--mono);font-size:11px;font-weight:700;min-width:32px;text-align:right}
-/* COORD TABLE */
 .ctbl{width:100%;border-collapse:collapse}
 .ctbl th{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;padding:9px 12px;border-bottom:2px solid var(--border);text-align:left;background:var(--bg)}
 .ctbl td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:12px;color:var(--t2);vertical-align:middle}
 .ctbl tr:last-child td{border-bottom:none}.ctbl tr:hover td{background:var(--gxl)}
 .cttag{font-family:var(--mono);font-size:11px;font-weight:700;background:var(--gl);color:var(--g2);padding:2px 8px;border-radius:5px}
 .isrp{font-family:var(--mono);font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px}
-/* AGENTES TABLE */
 .agcard{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);box-shadow:var(--sh);overflow:hidden;margin-bottom:20px}
 .aghead{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--border)}
 .agttl{font-size:13px;font-weight:700;color:var(--t1)}
@@ -337,10 +374,9 @@ textarea.fi{resize:vertical;min-height:100px;line-height:1.7}
 .nb{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap}
 .n1{background:#fde8e8;color:#c53030}.n2{background:#fef3cd;color:#b7791f}
 .n3{background:var(--gl);color:var(--g3)}.n4{background:#ebf8ff;color:var(--blue)}.n5{background:#faf5ff;color:var(--purp)}
-/* LEGENDAS ISR */
 .legend-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);padding:24px;box-shadow:var(--sh);margin-bottom:20px}
 .legend-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}
-.litem{border-radius:var(--r);padding:16px 14px;border:1.5px solid;transition:transform .2s,box-shadow .2s;cursor:default}
+.litem{border-radius:var(--r);padding:16px 14px;border:1.5px solid;transition:transform .2s,box-shadow .2s}
 .litem:hover{transform:translateY(-3px);box-shadow:var(--shmd)}
 .litem.l1{border-color:#fca5a5;background:#fef2f2}.litem.l2{border-color:#fcd34d;background:#fffbeb}
 .litem.l3{border-color:#86efac;background:#f0fdf4}.litem.l4{border-color:#93c5fd;background:#eff6ff}.litem.l5{border-color:#c4b5fd;background:#faf5ff}
@@ -353,7 +389,6 @@ textarea.fi{resize:vertical;min-height:100px;line-height:1.7}
 .litem.l1 .litem-range{background:#fee2e2;color:#dc2626}.litem.l2 .litem-range{background:#fef3c7;color:#d97706}
 .litem.l3 .litem-range{background:#dcfce7;color:#16a34a}.litem.l4 .litem-range{background:#dbeafe;color:#2563eb}.litem.l5 .litem-range{background:#ede9fe;color:#7c3aed}
 .litem-desc{font-size:11px;color:var(--t2);line-height:1.6}
-/* DIAGNÓSTICO */
 .diagcard{background:var(--card);border:1px solid var(--border);border-radius:var(--rlg);padding:24px;box-shadow:var(--sh);margin-bottom:32px}
 .dchips{display:flex;gap:9px;flex-wrap:wrap;margin-top:6px;margin-bottom:16px}
 .dchip{display:flex;align-items:center;gap:5px;background:var(--gxl);border:1px solid var(--gl);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--g3);font-weight:500}
@@ -361,16 +396,14 @@ textarea.fi{resize:vertical;min-height:100px;line-height:1.7}
 .diagta:focus{outline:none;border-color:var(--g4);background:var(--white);box-shadow:0 0 0 3px rgba(45,148,86,.1)}
 .btnsave{background:var(--g2);color:#fff;border:none;padding:10px 24px;border-radius:var(--rsm);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
 .btnsave:hover{background:var(--g3);transform:translateY(-1px)}
-/* TOAST */
 #toast{position:fixed;bottom:28px;right:28px;z-index:9999;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;font-family:var(--font);box-shadow:0 4px 20px rgba(0,0,0,.2);transition:all .3s;opacity:0;transform:translateY(10px);pointer-events:none}
 #toast.show{opacity:1;transform:translateY(0)}
-/* RESPONSIVE */
 @media(max-width:900px){
   .krow,.g2,.g3,.foto-grid,.legend-grid{grid-template-columns:1fr 1fr}
   .dbody,.cbody{padding:16px}.topbar,.dfbar{padding:0 16px}.dfbar{padding:12px 16px}
-  .banner{padding:24px 16px 20px}.mitems{grid-template-columns:repeat(2,1fr)!important}
+  .banner{padding:24px 16px 20px}.mitems{grid-template-columns:repeat(3,1fr)!important}
 }
-@media(max-width:540px){.krow,.foto-grid,.legend-grid{grid-template-columns:1fr}}
+@media(max-width:540px){.krow,.foto-grid,.legend-grid{grid-template-columns:1fr}.mitems{grid-template-columns:repeat(2,1fr)!important}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .kpi{animation:fadeUp .4s ease both}
 .kpi:nth-child(1){animation-delay:.05s}.kpi:nth-child(2){animation-delay:.1s}
@@ -395,131 +428,234 @@ textarea.fi{resize:vertical;min-height:100px;line-height:1.7}
   </div>
   <nav class="tnav">
     <button class="tb on" onclick="ir('cad')">Cadastro</button>
-    <button class="tb"    onclick="ir('dash')">Dashboard</button>
+    <button class="tb" onclick="ir('dash')">Dashboard</button>
   </nav>
 </header>
 
-<!-- ═══════════════════ CADASTRO ═══════════════════ -->
+<!-- ═══════ CADASTRO ═══════ -->
 <div class="screen on" id="s-cad">
   <div class="banner">
     <div class="banner-t">Cadastro de Atividade</div>
-    <div class="banner-s">Registre o gabarito e as fichas dos agentes para análise automática do ISR</div>
+    <div class="banner-s">Preencha todas as seções em ordem para registrar a atividade</div>
   </div>
   <div class="cbody">
 
-    <!-- 1 · INFORMAÇÕES DA ATIVIDADE -->
-    <div class="card">
-      <div class="ctit">Informações da Atividade</div>
-      <div class="g3">
-        <div class="fg"><label>Data</label><input class="fi" type="date" value="2026-04-12"></div>
-        <div class="fg"><label>Hora Início</label><input class="fi" type="time" value="09:30"></div>
-        <div class="fg"><label>Hora Término</label><input class="fi" type="time" value="14:00"></div>
-      </div>
-      <div class="g2" style="margin-top:14px">
-        <div class="fg"><label>Descrição da Atividade</label><input class="fi" type="text" placeholder="Ex: Substituição de transformador — CT Queimados"></div>
-        <div class="fg"><label>Local / Centro de Treinamento</label><input class="fi" type="text" placeholder="Ex: CT de Queimados"></div>
-      </div>
-    </div>
-
-    <!-- 2 · ÁREA ORGANIZACIONAL -->
-    <div class="card">
-      <div class="ctit">Área Organizacional</div>
-      <div class="g3">
-        <div class="fg">
-          <label>Superintendência</label>
-          <select class="fi" id="c-sup" onchange="cGer()">
-            <option value="">Selecione...</option>
-            <option value="OT">Serviços Técnicos (OT)</option>
-            <option value="OO">Engenharia e Obras (OO)</option>
-            <option value="OR">Serviços Comerciais (OR)</option>
-            <option value="OS">Serv. Compartilhados (OS)</option>
-          </select>
+    <!-- ── SEÇÃO 1: INFORMAÇÕES ── -->
+    <div class="card open" id="card-info">
+      <div class="card-header" onclick="toggleCard('card-info')">
+        <div class="card-header-left">
+          <div class="card-header-icon green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <div class="card-title">1. Informações da Atividade</div>
+            <div class="card-subtitle">Data, local, área organizacional e célula de segurança</div>
+          </div>
         </div>
-        <div class="fg"><label>Gerência</label><select class="fi" id="c-ger" onchange="cCoord()"><option value="">Selecione a superintendência</option></select></div>
-        <div class="fg"><label>Coordenação</label><select class="fi" id="c-coord"><option value="">Selecione a gerência</option></select></div>
-      </div>
-      <div class="g2" style="margin-top:14px">
-        <div class="fg"><label>Célula de Segurança</label><input class="fi" type="text" placeholder="Ex: Fabio Correa, Jorge Dantas, Vander Iones"></div>
-        <div class="fg"><label>Quantidade de Agentes</label><input class="fi" type="number" placeholder="Ex: 13" min="1" max="80"></div>
-      </div>
-    </div>
-
-    <!-- 3 · FICHAS DOS AGENTES -->
-    <div class="card">
-      <div class="ctit">Fichas dos Agentes</div>
-      <div class="uz" id="uz-fic">
-        <div class="uz-ico">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="card-badge active" id="badge-info">Preenchendo</span>
+          <span class="card-arrow">▼</span>
         </div>
-        <div class="uz-t">Soltar fichas aqui</div>
-        <div class="uz-s">PDF, JPG ou PNG · Até 80 arquivos · O sistema lê automaticamente os desvios marcados, incluindo os checks de comportamento (CO.01–CO.09)</div>
-        <div id="fic-badge" style="display:none" class="fbadge"><span id="fic-num">0 fichas</span></div>
-        <input type="file" accept=".pdf,.jpg,.jpeg,.png" multiple onchange="onFic(this)">
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="g3">
+            <div class="fg"><label>Data <span class="req">*</span></label><input class="fi" id="f-data" type="date" value="2026-04-12"></div>
+            <div class="fg"><label>Hora Início <span class="req">*</span></label><input class="fi" id="f-hinicio" type="time" value="09:30"></div>
+            <div class="fg"><label>Hora Término <span class="req">*</span></label><input class="fi" id="f-htermino" type="time" value="14:00"></div>
+          </div>
+          <div class="g2">
+            <div class="fg"><label>Descrição da Atividade <span class="req">*</span></label><input class="fi" id="f-desc" type="text" placeholder="Ex: Substituição de transformador — CT Queimados"></div>
+            <div class="fg"><label>Local / Centro de Treinamento <span class="req">*</span></label><input class="fi" id="f-local" type="text" placeholder="Ex: CT de Queimados"></div>
+          </div>
+          <div class="g3">
+            <div class="fg">
+              <label>Superintendência <span class="req">*</span></label>
+              <select class="fi" id="f-sup" onchange="cGer()">
+                <option value="">Selecione...</option>
+                <option value="OT">Serviços Técnicos (OT)</option>
+                <option value="OO">Engenharia e Obras (OO)</option>
+                <option value="OR">Serviços Comerciais (OR)</option>
+                <option value="OS">Serv. Compartilhados (OS)</option>
+              </select>
+            </div>
+            <div class="fg"><label>Gerência <span class="req">*</span></label><select class="fi" id="f-ger" onchange="cCoord()"><option value="">Selecione a superintendência</option></select></div>
+            <div class="fg"><label>Coordenação <span class="req">*</span></label><select class="fi" id="f-coord"><option value="">Selecione a gerência</option></select></div>
+          </div>
+          <div class="g2">
+            <div class="fg"><label>Célula de Segurança <span class="req">*</span></label><input class="fi" id="f-celula" type="text" placeholder="Ex: Fabio Correa, Jorge Dantas, Vander Iones"></div>
+            <div class="fg"><label>Quantidade de Agentes <span class="req">*</span></label><input class="fi" id="f-qtagentes" type="number" placeholder="Ex: 13" min="1" max="80"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-grn" onclick="salvarInfo()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Salvar Informações
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 4 · GABARITO -->
-    <div class="card">
-      <div class="ctit">Gabarito — Seleção dos Desvios Programados (NCₚ)</div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:14px;margin-top:-10px;padding:10px 14px;background:var(--gxl);border-radius:var(--rsm);border-left:3px solid var(--g4)">
-        Marque os itens do gabarito. Para itens que foram identificados como <strong style="color:var(--ord)">apontamento extra</strong> (VEᵢ), clique no botão <strong style="color:var(--ord)">VE</strong> ao lado do código.
+    <!-- ── SEÇÃO 2: GABARITO ── -->
+    <div class="card" id="card-gab">
+      <div class="card-header" onclick="toggleCard('card-gab')">
+        <div class="card-header-left">
+          <div class="card-header-icon orange">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f26522" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div>
+            <div class="card-title">2. Cadastrar Gabarito</div>
+            <div class="card-subtitle">Selecione os desvios programados (NCₚ)</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="card-badge pending" id="badge-gab">Pendente</span>
+          <span class="card-arrow">▼</span>
+        </div>
       </div>
-
-      <div class="ncp" style="flex-wrap:wrap">
-        <div class="ncpc"><div class="ncpn" id="n-total">0</div><div class="ncpl">Total NCₚ</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-prog">0</div><div class="ncpl">Programados</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-ve" style="color:var(--ord)">0</div><div class="ncpl">Extras (VEᵢ)</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-pd">0</div><div class="ncpl">PD</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-sp">0</div><div class="ncpl">SP</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-ee">0</div><div class="ncpl">EE</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-mfd">0</div><div class="ncpl">MFD</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-ro">0</div><div class="ncpl">RO</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-co">0</div><div class="ncpl">CO</div></div>
-        <div class="ncpc"><div class="ncpn" id="n-v">0</div><div class="ncpl">V</div></div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div style="font-size:12px;color:var(--t3);margin-bottom:16px;padding:10px 14px;background:var(--gxl);border-radius:var(--rsm);border-left:3px solid var(--g4)">
+            Marque os itens do gabarito. Para itens de <strong style="color:var(--ord)">apontamento extra (VEᵢ)</strong>, clique no botão <strong style="color:var(--ord)">VE</strong> ao lado do código.
+          </div>
+          <div class="ncp-wrap">
+            <div class="ncp-c"><div class="ncp-n" id="n-total">0</div><div class="ncp-l">Total NCₚ</div></div>
+            <div class="ncp-c"><div class="ncp-n" id="n-prog">0</div><div class="ncp-l">Programados</div></div>
+            <div class="ncp-c"><div class="ncp-n or" id="n-ve">0</div><div class="ncp-l">Extras VEᵢ</div></div>
+            <div class="ncp-c"><div class="ncp-n" id="n-pd">0</div><div class="ncp-l">PD</div></div>
+            <div class="ncp-c"><div class="ncp-n" id="n-sp">0</div><div class="ncp-l">SP</div></div>
+            <div class="ncp-c"><div class="ncp-n" id="n-ee">0</div><div class="ncp-l">EE</div></div>
+            <div class="ncp-c"><div class="ncp-n" id="n-mfd">0</div><div class="ncp-l">MFD</div></div>
+            <div class="ncp-c"><div class="ncp-n" id="n-ro">0</div><div class="ncp-l">RO</div></div>
+            <div class="ncp-c"><div class="ncp-n" id="n-co">0</div><div class="ncp-l">CO</div></div>
+            <div class="ncp-c"><div class="ncp-n" id="n-v">0</div><div class="ncp-l">V</div></div>
+          </div>
+          <div class="gab-search-row">
+            <input type="text" placeholder="🔍 Buscar item (ex: PD.05)" oninput="filtrarItens(this.value)" id="gab-busca">
+            <span class="gstat" id="stat-sel">0 selecionados</span>
+            <span class="gstat or" id="stat-ve">0 extras</span>
+            <span class="gstat btn" onclick="limparGabarito()">↺ Limpar</span>
+          </div>
+          <div id="gabarito-container"></div>
+          <div class="btn-row">
+            <button class="btn btn-sec" onclick="limparGabarito()">Limpar seleção</button>
+            <button class="btn btn-grn" onclick="salvarGabarito()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Salvar Gabarito
+            </button>
+          </div>
+        </div>
       </div>
-
-      <div class="gab-top">
-        <input type="text" placeholder="🔍 Buscar item (ex: PD.05, RO.02...)" oninput="filtrarItens(this.value)" id="gab-busca">
-        <span class="gstat" id="stat-sel">0 selecionados</span>
-        <span class="gstat orange" id="stat-ve">0 extras (VEᵢ)</span>
-        <button class="gstat gray" style="cursor:pointer;border:none" onclick="limparGabarito()">↺ Limpar</button>
-      </div>
-
-      <div id="gabarito-container"></div>
     </div>
 
-    <!-- 6 · REGISTRO FOTOGRÁFICO -->
-    <div class="card">
-      <div class="ctit">Registro Fotográfico</div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:18px;margin-top:-10px">Adicione fotos como evidência dos desvios observados durante a atividade simulada</div>
-      <div class="foto-grid" id="foto-grid"></div>
-      <button class="btn-add-foto" onclick="addSlot()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Adicionar mais fotos
-      </button>
-    </div>
-
-    <!-- 7 · OBSERVAÇÕES -->
-    <div class="card">
-      <div class="ctit">Observações</div>
-      <div class="fg">
-        <label>Observações da Atividade</label>
-        <textarea class="fi" id="obs-txt" rows="5" placeholder="Registre contexto, intercorrências, qualidade das inspeções e embasamento técnico dos agentes..."></textarea>
+    <!-- ── SEÇÃO 3: AGENTES ── -->
+    <div class="card" id="card-agentes">
+      <div class="card-header" onclick="toggleCard('card-agentes')">
+        <div class="card-header-left">
+          <div class="card-header-icon blue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b6cb0" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="card-title">3. Cadastrar Agentes</div>
+            <div class="card-subtitle">Registre os resultados de cada agente individualmente</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="card-badge pending" id="badge-agentes">Pendente</span>
+          <span class="card-arrow">▼</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div id="agentes-list" class="agentes-list"></div>
+          <div class="ag-concluir-row" id="ag-concluir-row" style="display:none">
+            <div class="ag-count">
+              <strong id="ag-count-num">0</strong> agente(s) cadastrado(s)
+            </div>
+            <button class="btn btn-ghost" onclick="novoAgente()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              + Agente
+            </button>
+            <button class="btn btn-grn" onclick="concluirAgentes()">
+              Concluir Agentes →
+            </button>
+          </div>
+          <div id="ag-first-btn">
+            <button class="btn btn-ghost" onclick="novoAgente()" style="width:100%;justify-content:center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Cadastrar Agente
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="cactions">
-      <button class="btn btn-sec" onclick="limparForm()">Limpar</button>
-      <button class="btn btn-or" id="btn-processar" onclick="processar()">Processar Fichas</button>
-      <button class="btn btn-grn" id="btn-salvar" onclick="salvarCadastro()">Salvar e Ver Dashboard →</button>
+    <!-- ── SEÇÃO 4: REGISTRO FOTOGRÁFICO ── -->
+    <div class="card" id="card-fotos">
+      <div class="card-header" onclick="toggleCard('card-fotos')">
+        <div class="card-header-left">
+          <div class="card-header-icon green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div>
+            <div class="card-title">4. Registro Fotográfico</div>
+            <div class="card-subtitle">Evidências dos desvios observados</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="card-badge pending" id="badge-fotos">Opcional</span>
+          <span class="card-arrow">▼</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="foto-grid" id="foto-grid"></div>
+          <button class="btn-add-foto" onclick="addSlot()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Adicionar mais fotos
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SEÇÃO 5: OBSERVAÇÕES ── -->
+    <div class="card" id="card-obs">
+      <div class="card-header" onclick="toggleCard('card-obs')">
+        <div class="card-header-left">
+          <div class="card-header-icon green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div>
+            <div class="card-title">5. Observações</div>
+            <div class="card-subtitle">Contexto, intercorrências e embasamento técnico</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="card-badge pending" id="badge-obs">Opcional</span>
+          <span class="card-arrow">▼</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="fg">
+            <label>Observações da Atividade</label>
+            <textarea class="fi" id="f-obs" rows="5" placeholder="Registre contexto, intercorrências, qualidade das inspeções e embasamento técnico dos agentes..."></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-grn" id="btn-concluir-cad" onclick="concluirCadastro()" disabled>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Concluir e Ver Dashboard →
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
 </div>
 
-<!-- ═══════════════════ DASHBOARD ═══════════════════ -->
+<!-- ═══════ DASHBOARD ═══════ -->
 <div class="screen" id="s-dash">
-
   <div class="dfbar">
     <div class="dfg"><label>Superintendência</label><select id="d-sup" onchange="dGer()"><option value="">Todas</option><option value="OT">Serviços Técnicos (OT)</option><option value="OO">Engenharia e Obras (OO)</option><option value="OR">Serviços Comerciais (OR)</option><option value="OS">Serv. Compartilhados (OS)</option></select></div>
     <div class="dfg"><label>Gerência</label><select id="d-ger" onchange="dCoord()"><option value="">Todas</option></select></div>
@@ -531,108 +667,78 @@ textarea.fi{resize:vertical;min-height:100px;line-height:1.7}
       Baixar Relatório (.pptx)
     </button>
   </div>
-
   <div class="dbody">
-
     <div class="krow">
-      <div class="kpi g"><div class="kico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="klbl">ISR Médio Geral</div><div class="kval" id="kv-isr">56,7%</div><div class="ksub">Gerência OTS · Expansão MT/BT</div><div class="ktag w">↓ Abaixo do esperado</div></div>
-      <div class="kpi o"><div class="kico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f26522" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="klbl">Total de Agentes</div><div class="kval" id="kv-ag">13</div><div class="ksub">3 coordenações avaliadas</div></div>
-      <div class="kpi b"><div class="kico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b6cb0" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="klbl">Desvios Identificados</div><div class="kval" id="kv-nci">61</div><div class="ksub">de 156 NCₚ propostos · 39%</div></div>
-      <div class="kpi r"><div class="kico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e53e3e" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="klbl">Falhas Comportamentais</div><div class="kval" id="kv-fa">7</div><div class="ksub">Fₐ · 5 agentes com desvios</div></div>
+      <div class="kpi g"><div class="kico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6b3c" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="klbl">ISR Médio Geral</div><div class="kval" id="kv-isr">—</div><div class="ksub" id="kv-isr-sub">Aguardando dados</div><div class="ktag w" id="kv-isr-tag">Sem registros</div></div>
+      <div class="kpi o"><div class="kico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f26522" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="klbl">Total de Agentes</div><div class="kval" id="kv-ag">—</div><div class="ksub">Registrados no sistema</div></div>
+      <div class="kpi b"><div class="kico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b6cb0" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="klbl">Desvios Identificados</div><div class="kval" id="kv-nci">—</div><div class="ksub">NCᵢ total</div></div>
+      <div class="kpi r"><div class="kico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e53e3e" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="klbl">Falhas Comportamentais</div><div class="kval" id="kv-fa">—</div><div class="ksub">Fₐ total</div></div>
     </div>
-
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px">
-      <div class="dc2"><div class="stit">ISR por Gerência e Coordenação</div><div class="ssub">Velocímetros individuais — Gerência OTS</div><div class="gwrap" id="gwrap"></div></div>
+      <div class="dc2"><div class="stit">ISR por Gerência e Coordenação</div><div class="ssub">Velocímetros individuais</div><div class="gwrap" id="gwrap"><div style="color:var(--t4);font-size:12px;padding:20px;text-align:center;width:100%">Sem dados cadastrados ainda</div></div></div>
       <div class="dc2">
-        <div class="stit">Composição dos Apontamentos</div><div class="ssub">Distribuição total · 156 NCₚ</div>
-        <div style="position:relative;height:175px"><canvas id="ch-donut" role="img" aria-label="Distribuição apontamentos"></canvas></div>
-        <div class="dlg">
-          <div class="dlr"><div class="dll"><div class="dld" style="background:#1a6b3c"></div>NCᵢ identificados</div><div class="dlv">61</div></div>
-          <div class="dlr"><div class="dll"><div class="dld" style="background:#f26522"></div>VEᵢ extras</div><div class="dlv">42</div></div>
-          <div class="dlr"><div class="dll"><div class="dld" style="background:#e2e8f0"></div>Não identificados</div><div class="dlv">53</div></div>
-          <div class="dlr"><div class="dll"><div class="dld" style="background:#e53e3e"></div>Fₐ comportamento</div><div class="dlv">7</div></div>
-        </div>
+        <div class="stit">Composição dos Apontamentos</div><div class="ssub">Distribuição total</div>
+        <div style="position:relative;height:175px"><canvas id="ch-donut"></canvas></div>
+        <div class="dlg" id="donut-legend"></div>
       </div>
     </div>
-
-    <!-- LEGENDAS ISR -->
     <div class="legend-card">
       <div class="stit">Legendas de Classificação do ISR</div>
-      <div class="ssub">Descrição de cada nível de percepção de risco dos agentes de inspeção</div>
+      <div class="ssub">Descrição de cada nível de percepção de risco</div>
       <div class="legend-grid">
-        <div class="litem l1"><div class="litem-head"><span class="litem-emoji">🔴</span><span class="litem-nivel">Nível 1 — Reativo</span></div><div class="litem-range">ISR ≤ 60%</div><div class="litem-desc">Baixa capacidade de percepção. Dificuldade em identificar as não conformidades. Atua de forma passiva, reagindo apenas quando exposto ao risco, sem antecipação ou análise preventiva.</div></div>
-        <div class="litem l2"><div class="litem-head"><span class="litem-emoji">🟠</span><span class="litem-nivel">Nível 2 — Dependente</span></div><div class="litem-range">60% &lt; ISR ≤ 70%</div><div class="litem-desc">Identifica parte dos desvios, dependendo de apoio externo. Conhecimento parcial dos procedimentos com limitações na autonomia para tomada de decisão segura.</div></div>
-        <div class="litem l3"><div class="litem-head"><span class="litem-emoji">🟢</span><span class="litem-nivel">Nível 3 — Consciente</span></div><div class="litem-range">70% &lt; ISR ≤ 80%</div><div class="litem-desc">Boa percepção de risco, identifica a maioria das não conformidades. Atua com consistência técnica e comportamental. Oportunidades de evolução na visão preventiva.</div></div>
-        <div class="litem l4"><div class="litem-head"><span class="litem-emoji">🔵</span><span class="litem-nivel">Nível 4 — Preventivo</span></div><div class="litem-range">80% &lt; ISR ≤ 97%</div><div class="litem-desc">Elevada capacidade de percepção. Identifica desvios com precisão e antecipa situações de risco. Domínio técnico e comportamental, aplicando corretamente procedimentos e regras de ouro.</div></div>
-        <div class="litem l5"><div class="litem-head"><span class="litem-emoji">🟣</span><span class="litem-nivel">Nível 5 — Interdependente</span></div><div class="litem-range">ISR &gt; 97%</div><div class="litem-desc">Excelência operacional. Percepção ampliada e comportamento proativo. Exemplo de conduta, contribuindo ativamente para a segurança coletiva e promovendo cultura de segurança sustentável.</div></div>
+        <div class="litem l1"><div class="litem-head"><span class="litem-emoji">🔴</span><span class="litem-nivel">Nível 1 — Reativo</span></div><div class="litem-range">ISR ≤ 60%</div><div class="litem-desc">Baixa percepção. Atua de forma passiva, reagindo apenas quando exposto ao risco.</div></div>
+        <div class="litem l2"><div class="litem-head"><span class="litem-emoji">🟠</span><span class="litem-nivel">Nível 2 — Dependente</span></div><div class="litem-range">60% &lt; ISR ≤ 70%</div><div class="litem-desc">Identifica parte dos desvios, dependendo de apoio externo para decisões seguras.</div></div>
+        <div class="litem l3"><div class="litem-head"><span class="litem-emoji">🟢</span><span class="litem-nivel">Nível 3 — Consciente</span></div><div class="litem-range">70% &lt; ISR ≤ 80%</div><div class="litem-desc">Boa percepção de risco. Identifica a maioria das não conformidades com consistência.</div></div>
+        <div class="litem l4"><div class="litem-head"><span class="litem-emoji">🔵</span><span class="litem-nivel">Nível 4 — Preventivo</span></div><div class="litem-range">80% &lt; ISR ≤ 97%</div><div class="litem-desc">Elevada percepção. Antecipa situações de risco com domínio técnico e comportamental.</div></div>
+        <div class="litem l5"><div class="litem-head"><span class="litem-emoji">🟣</span><span class="litem-nivel">Nível 5 — Interdependente</span></div><div class="litem-range">ISR &gt; 97%</div><div class="litem-desc">Excelência. Percepção ampliada, proativo e promove cultura de segurança sustentável.</div></div>
       </div>
     </div>
-
     <div class="dc2" style="margin-bottom:20px">
       <div class="stit">Ranking por Gerência — Desvios Identificados × Programados</div>
-      <div class="ssub">Comparativo por macro quesito · Gerência OTS</div>
-      <div style="position:relative;height:250px"><canvas id="ch-bar" role="img" aria-label="Desvios por macro quesito OTS"></canvas></div>
-      <div style="display:flex;justify-content:center;gap:18px;margin-top:12px;font-size:11px;color:var(--t3)">
-        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#1a6b3c;display:inline-block"></span>Identificados</span>
-        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgba(242,101,34,.25);border:1px solid #f26522;display:inline-block"></span>Programados</span>
-      </div>
+      <div class="ssub">Comparativo por macro quesito</div>
+      <div style="position:relative;height:250px"><canvas id="ch-bar"></canvas></div>
     </div>
-
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
-      <div class="dc2"><div class="stit">Taxa de Identificação por Macro Quesito</div><div class="ssub">% identificado em relação ao total programado</div><div class="mbl" id="mbl"></div></div>
-      <div class="dc2">
-        <div class="stit">ISR por Coordenação</div><div class="ssub">Comparativo com e sem apontamentos extras (VEᵢ)</div>
-        <table class="ctbl"><thead><tr><th>Coord.</th><th>Agentes</th><th>Com VEᵢ</th><th>Sem VEᵢ</th><th>Nível</th></tr></thead><tbody id="ctbody"></tbody></table>
-      </div>
+      <div class="dc2"><div class="stit">Taxa de Identificação por Macro Quesito</div><div class="ssub">% identificado em relação ao programado</div><div class="mbl" id="mbl"></div></div>
+      <div class="dc2"><div class="stit">ISR por Coordenação</div><div class="ssub">Com e sem VEᵢ</div><table class="ctbl"><thead><tr><th>Coord.</th><th>Agentes</th><th>Com VEᵢ</th><th>Sem VEᵢ</th><th>Nível</th></tr></thead><tbody id="ctbody"></tbody></table></div>
     </div>
-
     <div class="agcard">
       <div class="aghead">
         <div class="agttl">Agentes de Inspeção — Resultados Individuais</div>
         <div class="sw">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input class="sinp" type="text" placeholder="Buscar agente ou coordenação..." oninput="searchAg(this.value)">
+          <input class="sinp" type="text" placeholder="Buscar agente..." oninput="searchAg(this.value)">
         </div>
       </div>
       <div class="tscr">
         <table class="agt">
           <thead><tr><th>#</th><th>Agente</th><th>Coordenação</th><th>NCᵢ</th><th>VEᵢ</th><th>Fₐ</th><th>ISR</th><th>Nível</th></tr></thead>
-          <tbody id="agtbody"></tbody>
+          <tbody id="agtbody"><tr><td colspan="8" style="text-align:center;padding:30px;color:var(--t4)">Nenhum agente cadastrado ainda</td></tr></tbody>
         </table>
       </div>
     </div>
-
     <div class="diagcard">
       <div class="stit">Diagnóstico</div>
-      <div class="dchips">
-        <div class="dchip">📅 Substituição de transformador</div>
-        <div class="dchip">📍 CT de Queimados</div>
-        <div class="dchip">👥 13 agentes avaliados</div>
-        <div class="dchip">📋 156 NCₚ propostos</div>
-      </div>
-      <textarea class="diagta" id="diagta">As coordenações OTSV, OTSB e OTSL aplicaram o Visão Ún1ca em 13 agentes de inspeção, que no total realizaram 61 apontamentos com desvios, em um total de 156 apontamentos propostos. Foi simulada a atividade de retirada de transformador, no centro de treinamento de Queimados, onde toda a atividade foi realizada em ambiente controlado.
-
-Os agentes demonstraram baixa motivação para perceber os riscos, alcançando menos de 50% do ISR durante a atividade.
-
-Foram identificados 07 desvios voltados para o comportamento dos próprios agentes de inspeção. A coordenação OTSV apresentou 1 desvio, OTSL apresentou 2 desvios e OTSB apresentou 4 desvios.
-
-O Índice de Senso de Risco das coordenações encontra-se abaixo do esperado, sendo necessárias ações sistêmicas por parte da gestão para a tratativa do tema.</textarea>
+      <div class="dchips" id="diag-chips"></div>
+      <textarea class="diagta" id="diagta" placeholder="O diagnóstico será preenchido após o cadastro da atividade..."></textarea>
       <div style="display:flex;justify-content:flex-end;margin-top:12px">
         <button class="btnsave" onclick="salvarDiag(event)">Salvar Diagnóstico</button>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
 <script>
-/* ═══ CONFIG ═══ */
+/* ══════════════════════════════════════
+   CONFIG
+══════════════════════════════════════ */
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyp3_BNfGM3a0XFZygn5DJDA0uC9rbBaMrSJnf4WyVvaYV9rvl9lZJsT8Qro7IxyCBt/exec';
 
-/* ═══ ORG ═══ */
+/* ══════════════════════════════════════
+   ORG
+══════════════════════════════════════ */
 const ORG={
   OT:{g:{OTM:{l:'Ger. Manutenção BT MT',c:{OTMC:'Manut. Centro Sul',OTMV:'Manut. Vale',OTMI:'Institucional Vale',OTMS:'Manut. Barra',OTMO:'Manut. Oeste',OTMB:'Manut. Baixada',OTML:'Manut. Leste'}},OTN:{l:'Ger. Rede Norte',c:{OTNB:'Rede Baixada',OTNO:'Rede Oeste',OTNV:'Rede Vale'}},OTS:{l:'Ger. Serviço Rede Sul',c:{OTSB:'Rede Barra',OTSL:'Rede Leste',OTSV:'Rede Baixada/Vale',OTSC:'Rede Centro Sul'}}}},
   OO:{g:{OOI:{l:'Ger. Implantação Obras',c:{OOIA:'Automação',OOIS:'Obras AT e Subestações'}},OOE:{l:'Ger. Engenharia Elétrica',c:{OOEA:'Dimensionamento AT',OOEF:'Fiscalização',OOET:'Padrões Técnicos',OOEE:'Estudos Projetos',OOEM:'Dimensionamento MT BT'}},OOO:{l:'Ger. Expansão MT BT',c:{OOOO:'Obras Oeste',OOOL:'Obras Leste',OOOB:'Obras Baixada',OOOC:'Obras C Sul',OOOV:'Obras Vale'}},OOM:{l:'Ger. Manutenção AT',c:{OOMT:'Linhas Transmissão',OOMC:'Subestações Capital',OOMM:'Subestações Metropolit.'}},OOS:{l:'Ger. Subterrâneo',c:{OOSB:'BT Net',OOSM:'Subterrâneo MT',OOSQ:'Qualidade'}}}},
@@ -640,8 +746,10 @@ const ORG={
   OS:{g:{OSB:{l:'Ger. Infraestrutura e Bases',c:{OSBE:'Expansão e Modernização',OSBP:'Programação de Obras',OSBO:'Obras Especiais N Bases',OSBF:'Facilities e Mobilidade'}}}}
 };
 
-/* ═══ GABARITO DATA ═══ */
-const GABARITO_ITEMS=[
+/* ══════════════════════════════════════
+   GABARITO DATA
+══════════════════════════════════════ */
+const GAB_ITEMS=[
   ...Array.from({length:23},(_,i)=>({codigo:`PD.${String(i+1).padStart(2,'0')}`,macro:'PROCEDIMENTOS E DOCUMENTOS',tag:'PD',cor:'#1a6b3c',bg:'#e8f5ee'})),
   ...Array.from({length:5}, (_,i)=>({codigo:`SP.${String(i+1).padStart(2,'0')}`,macro:'SUPERVISÃO',tag:'SP',cor:'#2b6cb0',bg:'#ebf8ff'})),
   ...Array.from({length:5}, (_,i)=>({codigo:`EE.${String(i+1).padStart(2,'0')}`,macro:'EPI/EPC',tag:'EE',cor:'#b7791f',bg:'#fef3cd'})),
@@ -650,37 +758,28 @@ const GABARITO_ITEMS=[
   ...Array.from({length:15},(_,i)=>({codigo:`CO.${String(i+1).padStart(2,'0')}`,macro:'COMPORTAMENTO',tag:'CO',cor:'#e53e3e',bg:'#fff5f5'})),
   ...Array.from({length:7}, (_,i)=>({codigo:`V.${String(i+1).padStart(2,'0')}`,macro:'VEÍCULO',tag:'V',cor:'#0f4525',bg:'#e8f5ee'})),
 ];
-const gabState={};   // true = selecionado no gabarito
-const veState={};    // true = apontamento extra (VEᵢ)
-GABARITO_ITEMS.forEach(it=>{gabState[it.codigo]=false;veState[it.codigo]=false;});
+const gabState={};
+const veState={};
+GAB_ITEMS.forEach(it=>{gabState[it.codigo]=false;veState[it.codigo]=false;});
 
-/* ═══ MOCK DATA (dashboard) ═══ */
-const AG=[
-  {n:'Carlos Menezes', co:'OTSL',g:'OTS',s:'OT',nci:9, vei:6,fa:2,ncp:12},
-  {n:'Rodrigo Farias', co:'OTSL',g:'OTS',s:'OT',nci:7, vei:4,fa:0,ncp:12},
-  {n:'Marcos Silva',   co:'OTSL',g:'OTS',s:'OT',nci:5, vei:3,fa:0,ncp:12},
-  {n:'Paulo Nunes',    co:'OTSL',g:'OTS',s:'OT',nci:0, vei:3,fa:2,ncp:12},
-  {n:'Adriana Costa',  co:'OTSB',g:'OTS',s:'OT',nci:6, vei:4,fa:1,ncp:12},
-  {n:'Renato Lima',    co:'OTSB',g:'OTS',s:'OT',nci:4, vei:2,fa:1,ncp:12},
-  {n:'Fernanda Ramos', co:'OTSB',g:'OTS',s:'OT',nci:4, vei:2,fa:1,ncp:12},
-  {n:'Tiago Barbosa',  co:'OTSB',g:'OTS',s:'OT',nci:2, vei:2,fa:1,ncp:12},
-  {n:'Eduardo Souza',  co:'OTSV',g:'OTS',s:'OT',nci:8, vei:3,fa:0,ncp:12},
-  {n:'Luciana Pinto',  co:'OTSV',g:'OTS',s:'OT',nci:5, vei:2,fa:0,ncp:12},
-  {n:'Sandro Alves',   co:'OTSV',g:'OTS',s:'OT',nci:5, vei:2,fa:0,ncp:12},
-  {n:'Juliana Freitas',co:'OTSV',g:'OTS',s:'OT',nci:4, vei:1,fa:0,ncp:12},
-  {n:'Bruno Xavier',   co:'OTSV',g:'OTS',s:'OT',nci:4, vei:1,fa:1,ncp:12},
-];
-const MQD=[
-  {tag:'PD',nome:'Procedimentos', id:21,pd:52},{tag:'RO',nome:'Regras de Ouro',id:3,pd:26},
-  {tag:'CO',nome:'Comportamento', id:12,pd:26},{tag:'SP',nome:'Supervisão',id:13,pd:13},
-  {tag:'EE',nome:'EPI / EPC',id:5,pd:13},{tag:'MFD',nome:'Ferramentas',id:2,pd:13},{tag:'V',nome:'Veículo',id:5,pd:13},
-];
-const COORDS=[{c:'OTSL',ag:4,isr:70,sem:39},{c:'OTSB',ag:4,isr:44,sem:25},{c:'OTSV',ag:5,isr:66,sem:38}];
+/* ══════════════════════════════════════
+   ESTADO GLOBAL
+══════════════════════════════════════ */
+let cadId = null;        // ID do cadastro salvo
+let agentesData = [];    // lista de agentes cadastrados
+let agIdx = 0;           // índice do card de agente ativo
+let infoSalva = false;
+let gabSalvo = false;
+let agentesConcluidos = false;
+let dashAgentes = [];    // dados reais do Sheets
 
-/* ═══ HELPERS ═══ */
+/* ══════════════════════════════════════
+   HELPERS
+══════════════════════════════════════ */
 function calcISR(a){return Math.max(0,((a.nci+a.vei-a.fa)/a.ncp)*100)}
 function nv(v){if(v<=60)return{n:1,l:'Reativo',c:'n1'};if(v<=70)return{n:2,l:'Dependente',c:'n2'};if(v<=80)return{n:3,l:'Consciente',c:'n3'};if(v<=97)return{n:4,l:'Preventivo',c:'n4'};return{n:5,l:'Interdependente',c:'n5'}}
 function col(v){if(v<=60)return'#e53e3e';if(v<=70)return'#b7791f';if(v<=80)return'#1a6b3c';if(v<=97)return'#2b6cb0';return'#553c9a'}
+
 function toast(msg,tipo='ok'){
   const t=document.getElementById('toast');
   const cores={ok:'#0f4525',warn:'#b7791f',err:'#e53e3e'};
@@ -689,7 +788,28 @@ function toast(msg,tipo='ok'){
   clearTimeout(t._to);t._to=setTimeout(()=>t.classList.remove('show'),3500);
 }
 
-/* ═══ NAVEGAÇÃO ═══ */
+function validar(campos){
+  let ok=true;
+  campos.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const val=el.value.trim();
+    if(!val){el.classList.add('err');ok=false;}
+    else el.classList.remove('err');
+  });
+  return ok;
+}
+
+async function postSheets(payload){
+  try{
+    await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
+    return true;
+  }catch(e){return false;}
+}
+
+/* ══════════════════════════════════════
+   NAVEGAÇÃO
+══════════════════════════════════════ */
 function ir(s){
   document.querySelectorAll('.screen').forEach(e=>e.classList.remove('on'));
   document.querySelectorAll('.tb').forEach(e=>e.classList.remove('on'));
@@ -700,97 +820,127 @@ function ir(s){
   if(s==='dash')initDash();
 }
 
-/* ═══ CADASTRO ═══ */
+function toggleCard(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+function setBadge(id,tipo,texto){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.className='card-badge '+tipo;
+  el.textContent=texto;
+}
+
+function setCardIcon(cardId,done){
+  const card=document.getElementById(cardId);
+  const ico=card.querySelector('.card-header-icon');
+  if(done){ico.className='card-header-icon done';}
+}
+
+/* ══════════════════════════════════════
+   ORG SELECTS
+══════════════════════════════════════ */
 function cGer(){
-  const s=document.getElementById('c-sup').value,g=document.getElementById('c-ger');
-  g.innerHTML='<option value="">Todas</option>';
+  const s=document.getElementById('f-sup').value,g=document.getElementById('f-ger');
+  g.innerHTML='<option value="">Selecione...</option>';
   if(s&&ORG[s])Object.entries(ORG[s].g).forEach(([k,v])=>g.add(new Option(`${v.l} (${k})`,k)));
-  document.getElementById('c-coord').innerHTML='<option value="">Selecione a gerência</option>';
+  document.getElementById('f-coord').innerHTML='<option value="">Selecione a gerência</option>';
 }
 function cCoord(){
-  const s=document.getElementById('c-sup').value,g=document.getElementById('c-ger').value,c=document.getElementById('c-coord');
-  c.innerHTML='<option value="">Todas</option>';
+  const s=document.getElementById('f-sup').value,g=document.getElementById('f-ger').value;
+  const c=document.getElementById('f-coord');
+  c.innerHTML='<option value="">Selecione...</option>';
   if(s&&g&&ORG[s]&&ORG[s].g[g])Object.entries(ORG[s].g[g].c).forEach(([k,v])=>c.add(new Option(`${v} (${k})`,k)));
 }
-function onFic(i){
-  if(!i.files.length)return;
-  document.getElementById('uz-fic').classList.add('filled');
-  document.getElementById('fic-badge').style.display='inline-flex';
-  document.getElementById('fic-num').textContent=i.files.length+' ficha(s)';
+
+/* ══════════════════════════════════════
+   SEÇÃO 1 — SALVAR INFORMAÇÕES
+══════════════════════════════════════ */
+async function salvarInfo(){
+  const campos=['f-data','f-hinicio','f-htermino','f-desc','f-local','f-sup','f-ger','f-coord','f-celula','f-qtagentes'];
+  if(!validar(campos)){
+    toast('⚠️ Preencha todos os campos obrigatórios.','warn');return;
+  }
+  const dados={
+    timestamp:new Date().toISOString(),
+    data_atividade:document.getElementById('f-data').value,
+    hora_inicio:document.getElementById('f-hinicio').value,
+    hora_termino:document.getElementById('f-htermino').value,
+    descricao:document.getElementById('f-desc').value,
+    local:document.getElementById('f-local').value,
+    superintendencia:document.getElementById('f-sup').value,
+    gerencia:document.getElementById('f-ger').value,
+    coordenacao:document.getElementById('f-coord').value,
+    celula_seguranca:document.getElementById('f-celula').value,
+    qtd_agentes:document.getElementById('f-qtagentes').value,
+  };
+  cadId = 'CAD-'+Date.now();
+  await postSheets({acao:'salvarCadastro',dados:{...dados,id:cadId}});
+  infoSalva=true;
+  setBadge('badge-info','done','✓ Salvo');
+  setCardIcon('card-info',true);
+  // fecha e abre gabarito
+  document.getElementById('card-info').classList.remove('open');
+  document.getElementById('card-gab').classList.add('open');
+  setBadge('badge-gab','active','Preenchendo');
+  toast('✅ Informações salvas!','ok');
 }
 
-/* DESVIOS DE COMPORTAMENTO */
-let dcCounter=0;
-function addDC(valor=''){
-  const list=document.getElementById('dc-list');
-  const id='dc-'+dcCounter++;
-  const div=document.createElement('div');
-  div.className='dc-row';div.id=id;
-  div.innerHTML=`
-    <input type="text" value="${valor}" placeholder="Descreva o desvio de comportamento observado (agente, situação, etc.)">
-    <button class="dc-rm" onclick="document.getElementById('${id}').remove()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>`;
-  list.appendChild(div);
-}
-function getDCList(){
-  return Array.from(document.querySelectorAll('.dc-row input')).map(i=>i.value).filter(Boolean);
-}
-
-/* GABARITO */
+/* ══════════════════════════════════════
+   GABARITO
+══════════════════════════════════════ */
 function groupByMacro(items){
-  const g={};
-  items.forEach(it=>{if(!g[it.macro])g[it.macro]=[];g[it.macro].push(it);});
-  return g;
+  const g={};items.forEach(it=>{if(!g[it.macro])g[it.macro]=[];g[it.macro].push(it);});return g;
 }
+
 function renderGabarito(filtro=''){
   const container=document.getElementById('gabarito-container');
-  const grupos=groupByMacro(GABARITO_ITEMS);
+  const grupos=groupByMacro(GAB_ITEMS);
   container.innerHTML='';
   Object.entries(grupos).forEach(([macro,items])=>{
-    const visiveis=filtro?items.filter(it=>it.codigo.toLowerCase().includes(filtro.toLowerCase())):items;
-    if(!visiveis.length)return;
+    const vis=filtro?items.filter(it=>it.codigo.toLowerCase().includes(filtro.toLowerCase())):items;
+    if(!vis.length)return;
     const selCount=items.filter(it=>gabState[it.codigo]).length;
     const veCount=items.filter(it=>veState[it.codigo]).length;
     const first=items[0];
     const sec=document.createElement('div');
     sec.className='msec open';
     sec.innerHTML=`
-      <div class="mhdr" onclick="toggleMsec(this)">
+      <div class="mhdr" onclick="this.closest('.msec').classList.toggle('open')">
         <div class="mhdr-l">
           <span class="mtag" style="color:${first.cor};background:${first.bg}">${first.tag}</span>
           <span class="mname">${macro}</span>
-          <span class="mcnt">(${selCount}/${items.length} selecionados${veCount?` · ${veCount} extras`:''})</span>
+          <span class="mcnt">(${selCount}/${items.length}${veCount?' · '+veCount+' VE':''})</span>
         </div>
         <span class="marr">▼</span>
       </div>
       <div class="mitems">
-        ${visiveis.map(it=>`
+        ${vis.map(it=>`
           <div class="icb ${gabState[it.codigo]?'checked':''} ${veState[it.codigo]?'extra':''}" id="icb-${it.codigo}" onclick="toggleItem('${it.codigo}')">
             <input type="checkbox" ${gabState[it.codigo]?'checked':''} onclick="event.stopPropagation();toggleItem('${it.codigo}')">
             <span class="icode" style="color:${veState[it.codigo]?'var(--ord)':it.cor}">${it.codigo}</span>
-            <button class="btn-extra ${veState[it.codigo]?'ativo':''}" onclick="event.stopPropagation();toggleVE('${it.codigo}')" title="Marcar como apontamento extra (VEᵢ)">VE</button>
+            <button class="btn-ve ${veState[it.codigo]?'on':''}" onclick="event.stopPropagation();toggleVE('${it.codigo}')" title="Apontamento extra VEᵢ">VE</button>
           </div>`).join('')}
       </div>`;
     container.appendChild(sec);
   });
   updateGabStats();
 }
+
 function toggleItem(codigo){
   gabState[codigo]=!gabState[codigo];
-  if(!gabState[codigo])veState[codigo]=false; // se desmarca item, remove VE
+  if(!gabState[codigo])veState[codigo]=false;
   renderGabarito(document.getElementById('gab-busca').value);
 }
 function toggleVE(codigo){
-  if(!gabState[codigo])gabState[codigo]=true; // marcar automaticamente se não estiver
+  if(!gabState[codigo])gabState[codigo]=true;
   veState[codigo]=!veState[codigo];
   renderGabarito(document.getElementById('gab-busca').value);
 }
-function toggleMsec(hdr){hdr.closest('.msec').classList.toggle('open')}
 function updateGabStats(){
-  const sel=GABARITO_ITEMS.filter(it=>gabState[it.codigo]);
-  const ve=GABARITO_ITEMS.filter(it=>veState[it.codigo]);
-  const prog=sel.filter(it=>!veState[it.codigo]); // programados = selecionados sem VE
+  const sel=GAB_ITEMS.filter(it=>gabState[it.codigo]);
+  const ve=GAB_ITEMS.filter(it=>veState[it.codigo]);
+  const prog=sel.filter(it=>!veState[it.codigo]);
   document.getElementById('n-total').textContent=sel.length;
   document.getElementById('n-prog').textContent=prog.length;
   document.getElementById('n-ve').textContent=ve.length;
@@ -802,21 +952,217 @@ function updateGabStats(){
   document.getElementById('n-co').textContent=sel.filter(it=>it.tag==='CO').length;
   document.getElementById('n-v').textContent=sel.filter(it=>it.tag==='V').length;
   document.getElementById('stat-sel').textContent=sel.length+' selecionados';
-  document.getElementById('stat-ve').textContent=ve.length+' extras (VEᵢ)';
+  document.getElementById('stat-ve').textContent=ve.length+' extras';
 }
 function filtrarItens(q){renderGabarito(q)}
-function limparGabarito(){GABARITO_ITEMS.forEach(it=>{gabState[it.codigo]=false;veState[it.codigo]=false;});renderGabarito();}
+function limparGabarito(){GAB_ITEMS.forEach(it=>{gabState[it.codigo]=false;veState[it.codigo]=false;});renderGabarito();}
 
-/* FOTOS */
+async function salvarGabarito(){
+  const sel=GAB_ITEMS.filter(it=>gabState[it.codigo]);
+  if(sel.length===0){toast('⚠️ Selecione pelo menos um item no gabarito.','warn');return;}
+  const ve=GAB_ITEMS.filter(it=>veState[it.codigo]);
+  await postSheets({acao:'salvarGabarito',dados:{
+    id_cadastro:cadId,
+    timestamp:new Date().toISOString(),
+    ncp_total:sel.length,
+    itens_gabarito:sel.map(it=>it.codigo).join(', '),
+    itens_ve:ve.map(it=>it.codigo).join(', '),
+    qtd_ve:ve.length,
+  }});
+  gabSalvo=true;
+  setBadge('badge-gab','done','✓ Salvo');
+  setCardIcon('card-gab',true);
+  document.getElementById('card-gab').classList.remove('open');
+  document.getElementById('card-agentes').classList.add('open');
+  setBadge('badge-agentes','active','Preenchendo');
+  toast('✅ Gabarito salvo! Agora cadastre os agentes.','ok');
+}
+
+/* ══════════════════════════════════════
+   AGENTES
+══════════════════════════════════════ */
+function novoAgente(){
+  // verifica se tem gabarito salvo
+  if(!gabSalvo){toast('⚠️ Salve o gabarito antes de cadastrar agentes.','warn');return;}
+
+  const id='ag-'+agIdx;
+  agIdx++;
+
+  // esconde botão inicial
+  document.getElementById('ag-first-btn').style.display='none';
+
+  // monta os itens do gabarito selecionados
+  const itensGab=GAB_ITEMS.filter(it=>gabState[it.codigo]);
+  const grupos=groupByMacro(itensGab);
+
+  const itemsHtml=Object.entries(grupos).map(([macro,items])=>{
+    const first=items[0];
+    return `<div style="margin-bottom:12px">
+      <div style="font-size:10px;font-weight:700;color:${first.cor};text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+        <span style="background:${first.bg};padding:1px 6px;border-radius:4px">${first.tag}</span> ${macro}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+        ${items.map(it=>`
+          <div class="icb" id="${id}-${it.codigo}" onclick="toggleAgItem('${id}','${it.codigo}')">
+            <input type="checkbox" onclick="event.stopPropagation();toggleAgItem('${id}','${it.codigo}')">
+            <span class="icode" style="color:${it.cor}">${it.codigo}</span>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  const div=document.createElement('div');
+  div.className='agente-card';
+  div.id=id;
+  div.innerHTML=`
+    <div class="agente-card-header">
+      <div>
+        <div class="agente-card-name">Agente ${agIdx}</div>
+        <div class="agente-card-meta">Preencha nome, desvios identificados e comportamento</div>
+      </div>
+    </div>
+    <div class="agente-card-body" style="padding-top:16px">
+      <div class="fg">
+        <label>Nome do Agente <span class="req">*</span></label>
+        <input class="fi" id="${id}-nome" type="text" placeholder="Nome completo do agente">
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;margin-top:4px">
+        Itens Identificados — marque os que o agente identificou
+      </div>
+      ${itemsHtml}
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">
+          Desvios de Comportamento (Fₐ) — selecione a quantidade
+        </div>
+        <div class="dc-opts" id="${id}-dc">
+          ${[0,1,2,3,4,5,6,7,8,9].map(n=>`<div class="dc-opt ${n===0?'on':''}" id="${id}-dc-${n}" onclick="selectDC('${id}',${n})">${n}</div>`).join('')}
+        </div>
+        <div style="font-size:10px;color:var(--t3);margin-top:6px">Desvios de comportamento do próprio agente durante a inspeção</div>
+      </div>
+      <div class="agente-actions">
+        <button class="btn btn-sec" onclick="cancelarAgente('${id}')">Cancelar</button>
+        <button class="btn-salvar-ag" onclick="salvarAgente('${id}')">
+          ✓ Salvar Agente
+        </button>
+      </div>
+    </div>`;
+
+  document.getElementById('agentes-list').appendChild(div);
+  div.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function toggleAgItem(agId,codigo){
+  const el=document.getElementById(agId+'-'+codigo);
+  if(!el)return;
+  el.classList.toggle('checked');
+  const cb=el.querySelector('input[type=checkbox]');
+  if(cb)cb.checked=el.classList.contains('checked');
+}
+
+function selectDC(agId,n){
+  [0,1,2,3,4,5,6,7,8,9].forEach(i=>{
+    const el=document.getElementById(agId+'-dc-'+i);
+    if(el)el.classList.toggle('on',i===n);
+  });
+}
+
+function cancelarAgente(id){
+  const el=document.getElementById(id);
+  if(el)el.remove();
+  agIdx--;
+  if(document.querySelectorAll('.agente-card').length===0){
+    document.getElementById('ag-first-btn').style.display='block';
+    document.getElementById('ag-concluir-row').style.display='none';
+  }
+}
+
+async function salvarAgente(id){
+  const nome=document.getElementById(id+'-nome')?.value.trim();
+  if(!nome){
+    document.getElementById(id+'-nome').classList.add('err');
+    toast('⚠️ Informe o nome do agente.','warn');return;
+  }
+
+  // coleta itens marcados pelo agente
+  const itensGab=GAB_ITEMS.filter(it=>gabState[it.codigo]);
+  const marcados=itensGab.filter(it=>{
+    const el=document.getElementById(id+'-'+it.codigo);
+    return el&&el.classList.contains('checked');
+  });
+
+  // NCᵢ = interseção com gabarito (sem VE)
+  const nci=marcados.filter(it=>!veState[it.codigo]).length;
+  // VEᵢ = itens VE que o agente marcou
+  const vei=marcados.filter(it=>veState[it.codigo]).length;
+  // NCₚ = total do gabarito sem VE
+  const ncp=GAB_ITEMS.filter(it=>gabState[it.codigo]&&!veState[it.codigo]).length||1;
+  // Fₐ = desvios de comportamento selecionados
+  const dcEl=[0,1,2,3,4,5,6,7,8,9].find(n=>{
+    const el=document.getElementById(id+'-dc-'+n);
+    return el&&el.classList.contains('on');
+  });
+  const fa=dcEl||0;
+
+  const isr=Math.max(0,((nci+vei-fa)/ncp)*100);
+  const nivel=nv(isr);
+
+  const dados={
+    id_cadastro:cadId||'',
+    timestamp:new Date().toISOString(),
+    nome,
+    coordenacao:document.getElementById('f-coord')?.value||'',
+    gerencia:document.getElementById('f-ger')?.value||'',
+    suptcia:document.getElementById('f-sup')?.value||'',
+    nci,vei,fa,ncp,
+    isr:isr.toFixed(2),
+    nivel:nivel.n,
+    classificacao:nivel.l,
+  };
+
+  await postSheets({acao:'salvarAgente',dados});
+
+  // guarda localmente para o dashboard
+  agentesData.push({n:nome,co:dados.coordenacao,g:dados.gerencia,s:dados.suptcia,nci,vei,fa,ncp});
+
+  // fecha o card e mostra como salvo
+  const card=document.getElementById(id);
+  card.classList.add('saved');
+  card.querySelector('.agente-card-name').textContent=nome;
+  card.querySelector('.agente-card-meta').textContent=`ISR: ${isr.toFixed(1)}% — ${nivel.l} · NCᵢ:${nci} VEᵢ:${vei} Fₐ:${fa}`;
+
+  // mostra linha de concluir
+  document.getElementById('ag-concluir-row').style.display='flex';
+  document.getElementById('ag-count-num').textContent=agentesData.length;
+
+  toast(`✅ ${nome} salvo! ISR: ${isr.toFixed(1)}%`,'ok');
+}
+
+function concluirAgentes(){
+  if(agentesData.length===0){toast('⚠️ Cadastre pelo menos um agente.','warn');return;}
+  agentesConcluidos=true;
+  setBadge('badge-agentes','done',`✓ ${agentesData.length} agente(s)`);
+  setCardIcon('card-agentes',true);
+  document.getElementById('card-agentes').classList.remove('open');
+  document.getElementById('card-fotos').classList.add('open');
+  document.getElementById('card-obs').classList.add('open');
+  document.getElementById('btn-concluir-cad').disabled=false;
+  setBadge('badge-fotos','pending','Opcional');
+  setBadge('badge-obs','pending','Opcional');
+  toast('✅ Agentes concluídos! Finalize o cadastro.','ok');
+}
+
+/* ══════════════════════════════════════
+   FOTOS
+══════════════════════════════════════ */
 let fotoIdx=0;
 function addSlot(){
   const grid=document.getElementById('foto-grid'),sid='fs-'+fotoIdx++;
   const div=document.createElement('div');div.className='fslot';div.id=sid;
   div.innerHTML=`
-    <div class="fempty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-    <div class="fempty-t">Clique ou arraste</div>
-    <div class="fover"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-    <input class="fcap" type="text" placeholder="Descrição da evidência...">
+    <div class="f-empty-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+    <div class="f-empty-t">Clique ou arraste</div>
+    <div class="fover"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+    <input class="fcap" type="text" placeholder="Descrição...">
     <input type="file" accept="image/*" onchange="loadFoto(this,'${sid}')">`;
   grid.appendChild(div);
 }
@@ -827,121 +1173,87 @@ function loadFoto(inp,sid){
     slot.classList.add('loaded');
     const img=document.createElement('img');img.src=e.target.result;img.alt='evidência';
     slot.insertBefore(img,slot.firstChild);
-    slot.querySelector('.fempty-ico')?.remove();slot.querySelector('.fempty-t')?.remove();
+    slot.querySelector('.f-empty-ico')?.remove();
+    slot.querySelector('.f-empty-t')?.remove();
   };
   reader.readAsDataURL(inp.files[0]);
 }
 for(let i=0;i<4;i++)addSlot();
 
-/* SALVAR */
-async function salvarCadastro(){
-  const btn=document.getElementById('btn-salvar');
-  btn.textContent='Salvando...';btn.disabled=true;
-  const itens_sel=GABARITO_ITEMS.filter(it=>gabState[it.codigo]).map(it=>it.codigo);
-  const itens_ve=GABARITO_ITEMS.filter(it=>veState[it.codigo]).map(it=>it.codigo);
-  const data={
-    timestamp:new Date().toISOString(),
-    data_atividade:document.querySelector('input[type=date]')?.value||'',
-    hora_inicio:document.querySelectorAll('input[type=time]')[0]?.value||'',
-    hora_termino:document.querySelectorAll('input[type=time]')[1]?.value||'',
-    descricao:document.querySelectorAll('.fi[type=text]')[0]?.value||'',
-    local:document.querySelectorAll('.fi[type=text]')[1]?.value||'',
-    superintendencia:document.getElementById('c-sup')?.value||'',
-    gerencia:document.getElementById('c-ger')?.value||'',
-    coordenacao:document.getElementById('c-coord')?.value||'',
-    celula_seguranca:document.querySelectorAll('.fi[type=text]')[2]?.value||'',
-    qtd_agentes:document.querySelector('input[type=number]')?.value||'',
-    ncp_total:itens_sel.length,
-    itens_gabarito:itens_sel.join(', '),
-    itens_ve:itens_ve.join(', '),
-    qtd_ve:itens_ve.length,
-    desvios_comportamento:'Lido automaticamente via OCR da ficha do agente (checks CO.01 a CO.09)',
-    qtd_fa:'Identificado via OCR — seção comportamento da ficha',
-    observacoes:document.getElementById('obs-txt')?.value||'',
-  };
-  try{
-    await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'salvarCadastro',dados:data})});
-    toast('✅ Cadastro salvo no Google Sheets!','ok');
-    btn.textContent='Salvo ✓';
-    setTimeout(()=>{btn.textContent='Salvar e Ver Dashboard →';btn.disabled=false;ir('dash');},1800);
-  }catch(err){
-    toast('❌ Erro ao salvar. Verifique a conexão.','err');
-    btn.textContent='Salvar e Ver Dashboard →';btn.disabled=false;
+/* ══════════════════════════════════════
+   CONCLUIR CADASTRO
+══════════════════════════════════════ */
+async function concluirCadastro(){
+  if(!infoSalva){toast('⚠️ Salve as informações da atividade primeiro.','warn');return;}
+  if(!gabSalvo){toast('⚠️ Salve o gabarito primeiro.','warn');return;}
+  if(!agentesConcluidos){toast('⚠️ Conclua o cadastro de agentes primeiro.','warn');return;}
+
+  const obs=document.getElementById('f-obs').value;
+  if(obs.trim()){
+    await postSheets({acao:'salvarObservacao',dados:{id_cadastro:cadId,timestamp:new Date().toISOString(),observacoes:obs}});
   }
-}
-function processar(){
-  const btn=document.getElementById('btn-processar');
-  btn.textContent='Processando...';btn.disabled=true;
-  setTimeout(()=>{btn.textContent='Processar Fichas';btn.disabled=false;toast('✅ Fichas processadas! Salve para registrar.','ok');},1500);
-}
-function limparForm(){
-  limparGabarito();
-  document.querySelector('input[type=date]').value='';
-  document.querySelectorAll('.fi[type=text]').forEach(i=>i.value='');
-  document.getElementById('obs-txt').value='';
-  document.getElementById('uz-fic').classList.remove('filled');
-  document.getElementById('fic-badge').style.display='none';
+  toast('✅ Cadastro concluído! Abrindo dashboard...','ok');
+  setTimeout(()=>ir('dash'),1500);
 }
 
-/* ═══ DASHBOARD ═══ */
+/* ══════════════════════════════════════
+   DASHBOARD
+══════════════════════════════════════ */
 let chD=null,chB=null;
+
 function initDash(){
-  renderGauges();renderMbl();renderCoords();renderAg(AG);initCharts();initDagF();
-  carregarDashboard();
+  const dados=dashAgentes.length>0?dashAgentes:agentesData;
+  if(dados.length>0){
+    renderKPIs(dados);
+    renderGauges(dados);
+    renderAg(dados);
+    renderMbl(dados);
+    renderCoords(dados);
+    initCharts(dados);
+    initDagF(dados);
+    atualizarChips();
+  } else {
+    // tenta buscar do Sheets
+    carregarDashboard();
+  }
 }
+
 async function carregarDashboard(){
   try{
-    const resp = await fetch(SHEETS_URL + '?acao=getDados');
-    if(!resp.ok) return;
-    const json = await resp.json();
-
-    if(!json || !json.ok) return;
-
-    // Atualiza diagnóstico se houver
-    if(json.diagnostico && json.diagnostico.trim() !== ''){
-      document.getElementById('diagta').value = json.diagnostico;
+    const resp=await fetch(SHEETS_URL+'?acao=getDados');
+    if(!resp.ok)return;
+    const json=await resp.json();
+    if(json&&json.ok&&json.agentes&&json.agentes.length>0){
+      dashAgentes=json.agentes;
+      renderKPIs(dashAgentes);
+      renderGauges(dashAgentes);
+      renderAg(dashAgentes);
+      renderMbl(dashAgentes);
+      renderCoords(dashAgentes);
+      initCharts(dashAgentes);
+      initDagF(dashAgentes);
+      if(json.diagnostico)document.getElementById('diagta').value=json.diagnostico;
+      toast('📊 Dashboard atualizado com '+dashAgentes.length+' agente(s) do Sheets!','ok');
     }
-
-    // Se houver agentes salvos, usa dados reais
-    if(json.agentes && json.agentes.length > 0){
-      const lista = json.agentes;
-
-      // KPIs
-      const totalNci = lista.reduce((acc,a) => acc + (Number(a.nci)||0), 0);
-      const totalFa  = lista.reduce((acc,a) => acc + (Number(a.fa)||0),  0);
-      const totalNcp = lista.reduce((acc,a) => acc + (Number(a.ncp)||12),0);
-      const medIsr   = lista.reduce((acc,a) => acc + calcISR(a), 0) / lista.length;
-
-      document.getElementById('kv-isr').textContent = medIsr.toFixed(1) + '%';
-      document.getElementById('kv-ag').textContent  = lista.length;
-      document.getElementById('kv-nci').textContent = totalNci;
-      document.getElementById('kv-fa').textContent  = totalFa;
-
-      // Subtítulo do KPI agentes
-      const coords = [...new Set(lista.map(a=>a.co))];
-      document.querySelector('#kv-ag').closest('.kpi').querySelector('.ksub').textContent =
-        coords.length + ' coordenação(ões) avaliadas';
-
-      // Tabela de agentes
-      renderAg(lista);
-
-      // Atualiza badge do KPI ISR
-      const kpiIsr = document.getElementById('kv-isr').closest('.kpi');
-      const tag = kpiIsr.querySelector('.ktag');
-      if(tag){
-        if(medIsr < 60){ tag.textContent='↓ Reativo — abaixo do esperado'; tag.className='ktag w'; }
-        else if(medIsr < 80){ tag.textContent='↗ Em desenvolvimento'; tag.className='ktag w'; }
-        else{ tag.textContent='✓ Dentro do esperado'; tag.className='ktag ok'; }
-      }
-
-      toast('📊 Dashboard atualizado com ' + lista.length + ' agente(s) do Sheets!', 'ok');
-    }
-
-  }catch(e){
-    // Silencioso — mantém mockados se Sheets não responder
-    console.warn('Sheets não disponível, usando dados mockados:', e.message);
-  }
+  }catch(e){console.warn('Sheets indisponível:',e.message);}
 }
+
+function renderKPIs(lista){
+  const totalNci=lista.reduce((a,x)=>a+(Number(x.nci)||0),0);
+  const totalFa =lista.reduce((a,x)=>a+(Number(x.fa)||0),0);
+  const medIsr  =lista.reduce((a,x)=>a+calcISR(x),0)/lista.length;
+  document.getElementById('kv-isr').textContent=medIsr.toFixed(1)+'%';
+  document.getElementById('kv-ag').textContent=lista.length;
+  document.getElementById('kv-nci').textContent=totalNci;
+  document.getElementById('kv-fa').textContent=totalFa;
+  const tag=document.getElementById('kv-isr-tag');
+  if(medIsr<=60){tag.textContent='↓ Reativo';tag.className='ktag w';}
+  else if(medIsr<=80){tag.textContent='↗ Em desenvolvimento';tag.className='ktag w';}
+  else{tag.textContent='✓ Dentro do esperado';tag.className='ktag ok';}
+  const coords=[...new Set(lista.map(a=>a.co))];
+  document.getElementById('kv-isr-sub').textContent=coords.join(', ')||'—';
+}
+
 function drawG(id,val){
   const c=document.getElementById(id);if(!c)return;
   const ctx=c.getContext('2d'),cx=70,cy=72,r=52;
@@ -957,44 +1269,111 @@ function drawG(id,val){
   ctx.fillStyle=col(val);ctx.fill();ctx.restore();
   ctx.beginPath();ctx.arc(cx,cy,5.5,0,2*Math.PI);ctx.fillStyle=col(val);ctx.fill();
 }
-function renderGauges(){
+
+function renderGauges(lista){
   const el=document.getElementById('gwrap');el.innerHTML='';
-  [{l:'OTS Geral',v:49},{l:'OTSL',v:70},{l:'OTSV',v:66},{l:'OTSB',v:44}].forEach(g=>{
+  // agrupa por coordenação
+  const porCoord={};
+  lista.forEach(a=>{if(!porCoord[a.co])porCoord[a.co]=[];porCoord[a.co].push(a);});
+  // geral
+  const medGeral=lista.reduce((a,x)=>a+calcISR(x),0)/lista.length;
+  const gaugesData=[{l:'Geral',v:medGeral},...Object.entries(porCoord).map(([co,ags])=>({l:co,v:ags.reduce((a,x)=>a+calcISR(x),0)/ags.length}))];
+  gaugesData.forEach(g=>{
     const n=nv(g.v),gid='gv'+g.l.replace(/\s/g,'');
     const d=document.createElement('div');d.className='gi';
-    d.innerHTML=`<div class="gilbl">${g.l}</div><canvas id="${gid}" width="140" height="82" role="img" aria-label="ISR ${g.l}: ${g.v}%"></canvas><div class="gival" style="color:${col(g.v)}">${g.v}%</div><div class="gniv ${n.c}">${n.l}</div>`;
+    d.innerHTML=`<div class="gilbl">${g.l}</div><canvas id="${gid}" width="140" height="82"></canvas><div class="gival" style="color:${col(g.v)}">${g.v.toFixed(1)}%</div><div class="gniv ${n.c}">${n.l}</div>`;
     el.appendChild(d);setTimeout(()=>drawG(gid,g.v),80);
   });
 }
-function renderMbl(){
-  document.getElementById('mbl').innerHTML=MQD.map(m=>{
-    const p=Math.round((m.id/m.pd)*100),c=p>=80?'#1a6b3c':p>=50?'#b7791f':'#e53e3e';
-    return`<div class="mbr"><span class="mbtag">${m.tag}</span><span class="mbname">${m.nome}</span><div class="mbbg"><div class="mbfill" style="width:${p}%;background:${c}"></div></div><span class="mbpct" style="color:${c}">${p}%</span></div>`;
-  }).join('');
-}
-function renderCoords(){
-  document.getElementById('ctbody').innerHTML=COORDS.map(c=>{
-    const n=nv(c.isr),cc=col(c.isr);
-    return`<tr><td><span class="cttag">${c.c}</span></td><td>${c.ag}</td><td><span class="isrp" style="color:${cc};background:${cc}18">${c.isr}%</span></td><td style="color:var(--t3)">${c.sem}%</td><td><span class="nb ${n.c}">${n.l}</span></td></tr>`;
-  }).join('');
-}
-function renderAg(list){
-  document.getElementById('agtbody').innerHTML=list.map((a,i)=>{
+
+function renderAg(lista){
+  const tbody=document.getElementById('agtbody');
+  if(!lista.length){tbody.innerHTML='<tr><td colspan="8" style="text-align:center;padding:30px;color:var(--t4)">Nenhum agente cadastrado</td></tr>';return;}
+  tbody.innerHTML=lista.map((a,i)=>{
     const v=calcISR(a),n=nv(v),c=col(v),pct=Math.min(100,v).toFixed(0);
-    return`<tr><td style="color:var(--t4);font-size:11px;font-weight:600">${i+1}</td><td><span class="an">${a.n}</span></td><td><span class="ac">${a.co}</span></td><td>${a.nci}</td><td style="color:#b7791f;font-weight:600">${a.vei}</td><td style="color:#e53e3e;font-weight:600">${a.fa}</td><td><div class="ibar"><div class="ibg"><div class="ibf" style="width:${pct}%;background:${c}"></div></div><span class="iv" style="color:${c}">${v.toFixed(1)}%</span></div></td><td><span class="nb ${n.c}">${n.l}</span></td></tr>`;
+    return`<tr><td style="color:var(--t4);font-size:11px;font-weight:600">${i+1}</td><td><span class="an">${a.n}</span></td><td><span class="ac">${a.co||'—'}</span></td><td>${a.nci}</td><td style="color:#b7791f;font-weight:600">${a.vei}</td><td style="color:#e53e3e;font-weight:600">${a.fa}</td><td><div class="ibar"><div class="ibg"><div class="ibf" style="width:${pct}%;background:${c}"></div></div><span class="iv" style="color:${c}">${v.toFixed(1)}%</span></div></td><td><span class="nb ${n.c}">${n.l}</span></td></tr>`;
   }).join('');
 }
-function searchAg(q){renderAg(q?AG.filter(a=>a.n.toLowerCase().includes(q.toLowerCase())||a.co.toLowerCase().includes(q.toLowerCase())):AG)}
-function initCharts(){
+
+function renderMbl(lista){
+  // Recalcula macro com base nos dados reais
+  const mbl=document.getElementById('mbl');
+  const tags=['PD','SP','EE','MFD','RO','CO','V'];
+  const nomes={PD:'Procedimentos',SP:'Supervisão',EE:'EPI/EPC',MFD:'Ferramentas',RO:'Regras de Ouro',CO:'Comportamento',V:'Veículo'};
+  mbl.innerHTML=tags.map(tag=>{
+    const progItems=GAB_ITEMS.filter(it=>it.tag===tag&&gabState[it.codigo]);
+    if(!progItems.length)return'';
+    const pd=progItems.length*lista.length; // total possível
+    const id=lista.reduce((acc,a)=>{
+      const nci=Number(a.nci)||0;
+      return acc+Math.min(nci,progItems.length);
+    },0);
+    const p=pd>0?Math.min(100,Math.round((id/pd)*100)):0;
+    const c=p>=80?'#1a6b3c':p>=50?'#b7791f':'#e53e3e';
+    return`<div class="mbr"><span class="mbtag">${tag}</span><span class="mbname">${nomes[tag]}</span><div class="mbbg"><div class="mbfill" style="width:${p}%;background:${c}"></div></div><span class="mbpct" style="color:${c}">${p}%</span></div>`;
+  }).filter(Boolean).join('');
+  if(!mbl.innerHTML)mbl.innerHTML='<div style="color:var(--t4);font-size:12px;padding:20px;text-align:center">Sem dados suficientes</div>';
+}
+
+function renderCoords(lista){
+  const porCoord={};
+  lista.forEach(a=>{if(!porCoord[a.co])porCoord[a.co]=[];porCoord[a.co].push(a);});
+  document.getElementById('ctbody').innerHTML=Object.entries(porCoord).map(([co,ags])=>{
+    const comVe=ags.reduce((a,x)=>a+calcISR(x),0)/ags.length;
+    const semVe=ags.reduce((a,x)=>a+Math.max(0,((x.nci-x.fa)/x.ncp)*100),0)/ags.length;
+    const n=nv(comVe),cc=col(comVe);
+    return`<tr><td><span class="cttag">${co}</span></td><td>${ags.length}</td><td><span class="isrp" style="color:${cc};background:${cc}18">${comVe.toFixed(1)}%</span></td><td style="color:var(--t3)">${semVe.toFixed(1)}%</td><td><span class="nb ${n.c}">${n.l}</span></td></tr>`;
+  }).join('')||'<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--t4)">Sem dados</td></tr>';
+}
+
+function initCharts(lista){
+  const totalNci=lista.reduce((a,x)=>a+(Number(x.nci)||0),0);
+  const totalVei=lista.reduce((a,x)=>a+(Number(x.vei)||0),0);
+  const totalFa =lista.reduce((a,x)=>a+(Number(x.fa)||0),0);
+  const totalNcp=lista.reduce((a,x)=>a+(Number(x.ncp)||12),0);
+  const naoIdent=Math.max(0,totalNcp-totalNci);
+
+  document.getElementById('donut-legend').innerHTML=`
+    <div class="dlr"><div class="dll"><div class="dld" style="background:#1a6b3c"></div>NCᵢ identificados</div><div class="dlv">${totalNci}</div></div>
+    <div class="dlr"><div class="dll"><div class="dld" style="background:#f26522"></div>VEᵢ extras</div><div class="dlv">${totalVei}</div></div>
+    <div class="dlr"><div class="dll"><div class="dld" style="background:#e2e8f0"></div>Não identificados</div><div class="dlv">${naoIdent}</div></div>
+    <div class="dlr"><div class="dll"><div class="dld" style="background:#e53e3e"></div>Fₐ comportamento</div><div class="dlv">${totalFa}</div></div>`;
+
   if(chD)chD.destroy();
-  chD=new Chart(document.getElementById('ch-donut'),{type:'doughnut',data:{labels:['NCᵢ','VEᵢ','Não ident.','Fₐ'],datasets:[{data:[61,42,53,7],backgroundColor:['#1a6b3c','#f26522','#e2e8f0','#e53e3e'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:'70%'}});
+  chD=new Chart(document.getElementById('ch-donut'),{type:'doughnut',data:{labels:['NCᵢ','VEᵢ','Não ident.','Fₐ'],datasets:[{data:[totalNci,totalVei,naoIdent,totalFa],backgroundColor:['#1a6b3c','#f26522','#e2e8f0','#e53e3e'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:'70%'}});
+
+  // Bar chart por macro
+  const tags=['PD','SP','EE','MFD','RO','CO','V'];
+  const nomes={PD:'Procedimentos',SP:'Supervisão',EE:'EPI/EPC',MFD:'Ferramentas',RO:'Regras de Ouro',CO:'Comportamento',V:'Veículo'};
+  const progData=tags.map(tag=>GAB_ITEMS.filter(it=>it.tag===tag&&gabState[it.codigo]).length*lista.length);
+  const identData=tags.map((tag,i)=>Math.min(progData[i],lista.reduce((a,x)=>a+(Number(x.nci)||0),0)/tags.length));
+
   if(chB)chB.destroy();
-  chB=new Chart(document.getElementById('ch-bar'),{type:'bar',data:{labels:MQD.map(m=>m.nome),datasets:[{label:'Identificados',data:MQD.map(m=>m.id),backgroundColor:'#1a6b3c',borderRadius:5,borderSkipped:false},{label:'Programados',data:MQD.map(m=>m.pd),backgroundColor:'rgba(242,101,34,.2)',borderRadius:5,borderSkipped:false,borderColor:'#f26522',borderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:11,family:'Sora'},color:'#64748b'}},y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:11},color:'#64748b'}}}}});
+  chB=new Chart(document.getElementById('ch-bar'),{type:'bar',data:{labels:tags.map(t=>nomes[t]),datasets:[{label:'Identificados',data:identData,backgroundColor:'#1a6b3c',borderRadius:5,borderSkipped:false},{label:'Programados',data:progData,backgroundColor:'rgba(242,101,34,.2)',borderRadius:5,borderSkipped:false,borderColor:'#f26522',borderWidth:1.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:11,family:'Sora'},color:'#64748b'}},y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:11},color:'#64748b'}}}}});
 }
-function initDagF(){
+
+function searchAg(q){
+  const lista=dashAgentes.length>0?dashAgentes:agentesData;
+  renderAg(q?lista.filter(a=>a.n.toLowerCase().includes(q.toLowerCase())||a.co.toLowerCase().includes(q.toLowerCase())):lista);
+}
+
+function initDagF(lista){
   const el=document.getElementById('d-ag');el.innerHTML='<option value="">Todos</option>';
-  AG.forEach(a=>el.add(new Option(a.n,a.n)));
+  lista.forEach(a=>el.add(new Option(a.n,a.n)));
 }
+
+function atualizarChips(){
+  const chips=document.getElementById('diag-chips');
+  if(!chips)return;
+  const desc=document.getElementById('f-desc')?.value||'Atividade';
+  const local=document.getElementById('f-local')?.value||'Local não informado';
+  const nAg=agentesData.length||dashAgentes.length;
+  chips.innerHTML=`
+    <div class="dchip">📅 ${desc}</div>
+    <div class="dchip">📍 ${local}</div>
+    <div class="dchip">👥 ${nAg} agente(s)</div>`;
+}
+
 function dGer(){
   const s=document.getElementById('d-sup').value,g=document.getElementById('d-ger');
   g.innerHTML='<option value="">Todas</option>';
@@ -1002,110 +1381,88 @@ function dGer(){
   document.getElementById('d-coord').innerHTML='<option value="">Todas</option>';dApply();
 }
 function dCoord(){
-  const s=document.getElementById('d-sup').value,g=document.getElementById('d-ger').value,c=document.getElementById('d-coord');
+  const s=document.getElementById('d-sup').value,g=document.getElementById('d-ger').value;
+  const c=document.getElementById('d-coord');
   c.innerHTML='<option value="">Todas</option>';
   if(s&&g&&ORG[s]&&ORG[s].g[g])Object.entries(ORG[s].g[g].c).forEach(([k,v])=>c.add(new Option(`${v} (${k})`,k)));
   dApply();
 }
 function dApply(){
-  const s=document.getElementById('d-sup').value,g=document.getElementById('d-ger').value,c=document.getElementById('d-coord').value,a=document.getElementById('d-ag').value;
-  let f=AG;
-  if(s)f=f.filter(x=>x.s===s);if(g)f=f.filter(x=>x.g===g);if(c)f=f.filter(x=>x.co===c);if(a)f=f.filter(x=>x.n===a);
+  const s=document.getElementById('d-sup').value,g=document.getElementById('d-ger').value;
+  const c=document.getElementById('d-coord').value,a=document.getElementById('d-ag').value;
+  const base=dashAgentes.length>0?dashAgentes:agentesData;
+  let f=base;
+  if(s)f=f.filter(x=>x.s===s);if(g)f=f.filter(x=>x.g===g);
+  if(c)f=f.filter(x=>x.co===c);if(a)f=f.filter(x=>x.n===a);
   renderAg(f);
-  if(f.length){
-    const mi=f.reduce((acc,x)=>acc+calcISR(x),0)/f.length;
-    document.getElementById('kv-isr').textContent=mi.toFixed(1)+'%';
-    document.getElementById('kv-ag').textContent=f.length;
-    document.getElementById('kv-nci').textContent=f.reduce((acc,x)=>acc+x.nci,0);
-    document.getElementById('kv-fa').textContent=f.reduce((acc,x)=>acc+x.fa,0);
-  }
+  if(f.length)renderKPIs(f);
 }
 function dReset(){
   ['d-sup','d-ger','d-coord','d-ag'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('d-ger').innerHTML='<option value="">Todas</option>';
   document.getElementById('d-coord').innerHTML='<option value="">Todas</option>';
-  renderAg(AG);
-  document.getElementById('kv-isr').textContent='56,7%';document.getElementById('kv-ag').textContent='13';
-  document.getElementById('kv-nci').textContent='61';document.getElementById('kv-fa').textContent='7';
-}
-function salvarDiag(e){
-  const b=e.target;b.textContent='Salvando...';b.disabled=true;
-  const texto=document.getElementById('diagta').value;
-  fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({acao:'salvarDiagnostico',dados:{timestamp:new Date().toISOString(),diagnostico:texto}})
-  }).then(()=>{
-    toast('✅ Diagnóstico salvo!','ok');
-    b.textContent='Salvo ✓';b.style.background='#2d9456';
-    setTimeout(()=>{b.textContent='Salvar Diagnóstico';b.style.background='';b.disabled=false;},2500);
-  }).catch(()=>{toast('❌ Erro ao salvar.','err');b.textContent='Salvar Diagnóstico';b.disabled=false;});
+  const base=dashAgentes.length>0?dashAgentes:agentesData;
+  renderAg(base);if(base.length)renderKPIs(base);
 }
 
-/* ═══ PPTX ═══ */
+async function salvarDiag(e){
+  const b=e.target;b.textContent='Salvando...';b.disabled=true;
+  const texto=document.getElementById('diagta').value;
+  if(!texto.trim()){toast('⚠️ Escreva o diagnóstico antes de salvar.','warn');b.textContent='Salvar Diagnóstico';b.disabled=false;return;}
+  await postSheets({acao:'salvarDiagnostico',dados:{timestamp:new Date().toISOString(),diagnostico:texto,id_cadastro:cadId||''}});
+  toast('✅ Diagnóstico salvo!','ok');
+  b.textContent='Salvo ✓';b.style.background='#2d9456';
+  setTimeout(()=>{b.textContent='Salvar Diagnóstico';b.style.background='';b.disabled=false;},2500);
+}
+
+/* ══════════════════════════════════════
+   PPTX
+══════════════════════════════════════ */
 function baixarPPTX(){
+  const lista=dashAgentes.length>0?dashAgentes:agentesData;
   const pptx=new PptxGenJS();pptx.layout='LAYOUT_WIDE';
   const CG2='0F4525',CG3='1A6B3C',COR='F26522',CRED='E53E3E',CBLUE='2B6CB0',CAMBER='B7791F',CPURP='553C9A';
-  const addSlideBase=(titulo)=>{
+  const base=(titulo)=>{
     const s=pptx.addSlide();
     s.addShape(pptx.ShapeType.rect,{x:0,y:0,w:'100%',h:.7,fill:{color:CG2}});
     s.addText('Visão Ún1ca',{x:.3,y:.1,w:3,h:.5,color:'FFFFFF',fontSize:16,bold:true,fontFace:'Arial'});
-    s.addText('Light — Percepção de Risco Operacional',{x:.3,y:.38,w:5,h:.3,color:'AAAAAA',fontSize:9,fontFace:'Arial'});
+    s.addText('Light — Percepção de Risco',{x:.3,y:.38,w:5,h:.3,color:'AAAAAA',fontSize:9,fontFace:'Arial'});
     if(titulo){s.addShape(pptx.ShapeType.rect,{x:0,y:.7,w:'100%',h:.55,fill:{color:CG3}});s.addText(titulo,{x:.4,y:.75,w:12,h:.45,color:'FFFFFF',fontSize:14,bold:true,fontFace:'Arial'});}
     s.addShape(pptx.ShapeType.rect,{x:0,y:7.1,w:'100%',h:.4,fill:{color:'F0F4F1'}});
     s.addText('Programa Visão Ún1ca — Light S.A.',{x:.3,y:7.15,w:12,h:.3,color:'888888',fontSize:8,fontFace:'Arial'});
     return s;
   };
   const nvlI=v=>{if(v<=60)return{l:'Reativo',cor:CRED};if(v<=70)return{l:'Dependente',cor:CAMBER};if(v<=80)return{l:'Consciente',cor:CG3};if(v<=97)return{l:'Preventivo',cor:CBLUE};return{l:'Interdependente',cor:CPURP};};
-  // CAPA
+  // Capa
   const s1=pptx.addSlide();
   s1.addShape(pptx.ShapeType.rect,{x:0,y:0,w:'100%',h:'100%',fill:{color:CG2}});
   s1.addShape(pptx.ShapeType.rect,{x:0,y:5.5,w:'100%',h:2,fill:{color:CG3}});
   s1.addText('Visão Ún1ca',{x:1,y:1.2,w:11,h:1.2,color:'FFFFFF',fontSize:44,bold:true,fontFace:'Arial',align:'center'});
   s1.addText('Relatório de Percepção de Risco',{x:1,y:2.5,w:11,h:.6,color:'F2FAF5',fontSize:20,fontFace:'Arial',align:'center'});
-  s1.addText('Gerência de Saúde, Segurança e Bem-estar',{x:1,y:3.2,w:11,h:.5,color:'AADDCC',fontSize:14,fontFace:'Arial',align:'center'});
-  s1.addText('Gerência OTS — Expansão Sistema MT/BT',{x:1,y:5.6,w:11,h:.5,color:'FFFFFF',fontSize:13,bold:true,fontFace:'Arial',align:'center'});
+  s1.addText('Light — Gerência de Saúde, Segurança e Bem-estar',{x:1,y:3.2,w:11,h:.5,color:'AADDCC',fontSize:14,fontFace:'Arial',align:'center'});
   s1.addText(new Date().toLocaleDateString('pt-BR',{year:'numeric',month:'long'}),{x:1,y:6.2,w:11,h:.4,color:'AAAAAA',fontSize:11,fontFace:'Arial',align:'center'});
+  if(!lista.length){pptx.writeFile({fileName:'Visao_Unica_Relatorio.pptx'});return;}
   // KPIs
-  const s2=addSlideBase('Resumo Executivo — Indicadores Gerais');
-  [{lbl:'ISR Médio',val:document.getElementById('kv-isr').textContent,cor:CG3},{lbl:'Agentes',val:document.getElementById('kv-ag').textContent,cor:COR},{lbl:'NCᵢ Identificados',val:document.getElementById('kv-nci').textContent,cor:CBLUE},{lbl:'Fₐ Comportamentais',val:document.getElementById('kv-fa').textContent,cor:CRED}].forEach((k,i)=>{
+  const medIsr=lista.reduce((a,x)=>a+calcISR(x),0)/lista.length;
+  const s2=base('Resumo Executivo');
+  [{lbl:'ISR Médio',val:medIsr.toFixed(1)+'%',cor:CG3},{lbl:'Agentes',val:''+lista.length,cor:COR},{lbl:'NCᵢ Total',val:''+lista.reduce((a,x)=>a+(Number(x.nci)||0),0),cor:CBLUE},{lbl:'Fₐ Total',val:''+lista.reduce((a,x)=>a+(Number(x.fa)||0),0),cor:CRED}].forEach((k,i)=>{
     const x=.3+i*3.25;
     s2.addShape(pptx.ShapeType.rect,{x,y:1.4,w:3,h:2.2,fill:{color:'FFFFFF'},line:{color:'E2E8F0',width:1}});
     s2.addShape(pptx.ShapeType.rect,{x,y:1.4,w:3,h:.1,fill:{color:k.cor}});
     s2.addText(k.lbl,{x:x+.1,y:1.6,w:2.8,h:.35,color:'64748B',fontSize:9,bold:true,fontFace:'Arial'});
     s2.addText(k.val,{x:x+.1,y:1.95,w:2.8,h:.75,color:'0F172A',fontSize:32,bold:true,fontFace:'Courier New'});
   });
-  // Coords
-  const s3=addSlideBase('ISR por Coordenação');
-  [{c:'OTSL',isr:70,sem:39,ag:4},{c:'OTSB',isr:44,sem:25,ag:4},{c:'OTSV',isr:66,sem:38,ag:5},{c:'OTS Geral',isr:49,sem:22,ag:13}].forEach((c,i)=>{
-    const x=.3+(i%2)*6.5,y=1.4+Math.floor(i/2)*2.6,n=nvlI(c.isr),cc=c.isr;
-    s3.addShape(pptx.ShapeType.rect,{x,y,w:6.1,h:2.3,fill:{color:'FFFFFF'},line:{color:'E2E8F0',width:1}});
-    s3.addShape(pptx.ShapeType.rect,{x,y,w:6.1,h:.08,fill:{color:n.cor}});
-    s3.addText(c.c,{x:x+.2,y:y+.15,w:3,h:.45,color:'0F172A',fontSize:18,bold:true,fontFace:'Courier New'});
-    s3.addText(`${c.ag} agentes`,{x:x+.2,y:y+.6,w:3,h:.3,color:'94A3B8',fontSize:10,fontFace:'Arial'});
-    s3.addText(`${c.isr}%`,{x:x+3.2,y:y+.1,w:2.7,h:.7,color:n.cor,fontSize:36,bold:true,fontFace:'Courier New',align:'right'});
-    s3.addShape(pptx.ShapeType.rect,{x:x+.2,y:y+1.65,w:5.7,h:.18,fill:{color:'E2E8F0'}});
-    s3.addShape(pptx.ShapeType.rect,{x:x+.2,y:y+1.65,w:Math.min(5.7,5.7*c.isr/100),h:.18,fill:{color:n.cor}});
-    s3.addText(`Sem VEᵢ: ${c.sem}%`,{x:x+.2,y:y+1.9,w:5.7,h:.25,color:'94A3B8',fontSize:9,fontFace:'Arial'});
-  });
-  // Macro
-  const s4=addSlideBase('Desvios Identificados × Programados por Macro Quesito');
-  MQD.forEach((m,i)=>{
-    const y=1.35+i*.77,pct=m.id/m.pd,c=pct>=.8?CG3:pct>=.5?CAMBER:CRED;
-    s4.addShape(pptx.ShapeType.rect,{x:.3,y:y+.05,w:.7,h:.48,fill:{color:'F2FAF5'},line:{color:'E8F5EE',width:1}});
-    s4.addText(m.tag,{x:.3,y:y+.05,w:.7,h:.48,color:CG3,fontSize:9,bold:true,fontFace:'Courier New',align:'center',valign:'middle'});
-    s4.addText(m.nome,{x:1.1,y:y+.08,w:2.8,h:.4,color:'334155',fontSize:11,fontFace:'Arial',valign:'middle'});
-    s4.addShape(pptx.ShapeType.rect,{x:4.1,y:y+.18,w:6.5,h:.22,fill:{color:'E2E8F0'}});
-    s4.addShape(pptx.ShapeType.rect,{x:4.1,y:y+.18,w:Math.min(6.5,6.5*pct),h:.22,fill:{color:c}});
-    s4.addText(`${m.id}/${m.pd} (${Math.round(pct*100)}%)`,{x:10.8,y:y+.1,w:2.3,h:.38,color:c,fontSize:10,bold:true,fontFace:'Courier New',align:'right'});
-  });
   // Agentes
-  const s5=addSlideBase('Agentes de Inspeção — Resultados Individuais');
+  const s5=base('Agentes de Inspeção — Resultados Individuais');
   const headers=['#','Agente','Coordenação','NCᵢ','VEᵢ','Fₐ','ISR','Nível'];
-  const rows=AG.map((a,i)=>{const v=calcISR(a),n=nvlI(v);return[`${i+1}`,a.n,a.co,`${a.nci}`,`${a.vei}`,`${a.fa}`,`${v.toFixed(1)}%`,n.l];});
-  s5.addTable([headers.map(h=>({text:h,options:{bold:true,color:'FFFFFF',fill:{color:CG2},fontSize:9,fontFace:'Arial'}})),...rows.map((r,ri)=>r.map((cell,ci)=>({text:cell,options:{fontSize:9,fontFace:ci===6?'Courier New':'Arial',bold:ci===6,color:ci===6?nvlI(parseFloat(cell)).cor:'334155',fill:{color:ri%2===0?'FFFFFF':'F8FAFB'}}})))],{x:.3,y:1.4,w:12.5,h:5.5,colW:[.4,2.8,1.4,.7,.7,.6,1.0,1.6],border:{type:'solid',color:'E2E8F0',pt:.5}});
+  const rows=lista.map((a,i)=>{const v=calcISR(a),n=nvlI(v);return[`${i+1}`,a.n,a.co||'—',`${a.nci}`,`${a.vei}`,`${a.fa}`,`${v.toFixed(1)}%`,n.l];});
+  s5.addTable([headers.map(h=>({text:h,options:{bold:true,color:'FFFFFF',fill:{color:CG2},fontSize:9,fontFace:'Arial'}})),...rows.map((r,ri)=>r.map((cell,ci)=>({text:cell,options:{fontSize:9,fontFace:ci===6?'Courier New':'Arial',bold:ci===6,fill:{color:ri%2===0?'FFFFFF':'F8FAFB'}}})))],{x:.3,y:1.4,w:12.5,h:5.5,colW:[.4,2.8,1.4,.7,.7,.6,1.0,1.6],border:{type:'solid',color:'E2E8F0',pt:.5}});
   pptx.writeFile({fileName:'Visao_Unica_Relatorio.pptx'});
 }
 
-/* ═══ INIT ═══ */
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
 renderGabarito();
 </script>
 </body>
